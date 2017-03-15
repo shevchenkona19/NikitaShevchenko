@@ -1,4 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group>
+        <item
+            android:id="@+id/navFeed"
+            android:title="Menu" />
+        <item
+            android:id="@+id/navResources"
+            android:title="Resources" />
+        <item
+            android:id="@+id/navPeople"
+            android:title="People" />
+        <item
+            android:id="@+id/navInterests"
+            android:title="My interests" />
+    </group>
 
+    <item android:title="Model">
+        <menu>
+            <item
+                android:id="@+id/navMoney"
+                android:title="Money" />
+            <item
+                android:id="@+id/navSport"
+                android:title="Sport" />
+        </menu>
+    </item>
 </menu>
