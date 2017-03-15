@@ -14,6 +14,8 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.widget.Toast;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -26,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
     DrawerLayout dwLayout;
     @BindView(R.id.navView)
     NavigationView navView;
-    private RVAdapter adapter;
+    @Inject RVAdapter adapter;
     private ActivityOptions transitionActivityOptions;
 
     @Override
@@ -34,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_drawer);
         ButterKnife.bind(this);
+        MyApp.getAppComponent().inject(this);
         setSupportActionBar(tb);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, dwLayout,
                 tb, R.string.navigation_drawer_open, R.string.navigation_drawer_close);

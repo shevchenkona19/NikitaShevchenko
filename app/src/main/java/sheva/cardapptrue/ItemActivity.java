@@ -26,7 +26,5 @@ public class ItemActivity extends AppCompatActivity {
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
             ivTarget.setTransitionName("animation1");
         }
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
     }
 }
