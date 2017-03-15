@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/clLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -14,14 +15,15 @@
             android:layout_height="match_parent"
             app:contentScrim="?attr/colorPrimary"
             app:expandedTitleTextAppearance="@style/TextAppearance.AppCompat.Title"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+            app:layout_scrollFlags="scroll|exitUntilCollapsed|snap">
 
             <ImageView
+                android:id="@+id/ivTarget"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
+                android:scaleType="fitCenter"
                 app:layout_collapseMode="parallax"
-                app:srcCompat="@drawable/test_pic"
-                android:scaleType="fitCenter" />
+                app:srcCompat="@drawable/test_pic" />
 
             <android.support.v7.widget.Toolbar
                 android:id="@+id/tbItem"
@@ -31,4 +33,46 @@
                 app:layout_collapseMode="pin"></android.support.v7.widget.Toolbar>
         </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="bottom"
+            android:padding="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis vitae ullamcorper ligula, at placerat sapien. Integer fringilla ornare mauris, egestas pharetra ipsum dapibus ut. Curabitur at quam bibendum, dictum ipsum ac, accumsan eros. Phasellus rhoncus erat non feugiat placerat. Nullam ac maximus libero, at sagittis felis. Aliquam eget justo ornare enim varius tempus. Praesent venenatis ultricies ligula, ac facilisis urna. Morbi quis porttitor lacus. Maecenas luctus maximus ornare. Aenean ac gravida nisi. Ut ac enim nulla. Pellentesque eget odio mattis, faucibus arcu luctus, tincidunt leo. Nunc vel massa eu ante elementum convallis. Cras ut augue mauris. Fusce sodales vitae erat imperdiet faucibus.
+
+Vivamus viverra vel augue sed faucibus. Cras nisl nibh, scelerisque consectetur eros in, facilisis sollicitudin nisl. Donec tincidunt ullamcorper leo, et accumsan ex consectetur non. Integer convallis vulputate feugiat. Pellentesque tristique ac elit sit amet volutpat. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Integer condimentum semper quam, vitae pharetra elit dignissim quis. Curabitur ac est pellentesque dolor tempor vulputate ac in tellus. Duis et lectus urna. Vivamus imperdiet, lacus vitae consectetur convallis, magna libero vehicula quam, eget malesuada lacus nulla et est. Sed suscipit dictum turpis, sit amet lobortis mi hendrerit pretium. Phasellus posuere euismod fringilla. Ut commodo in nisl vel luctus. Etiam suscipit purus sed risus vulputate, vel faucibus tellus suscipit. Fusce vehicula vestibulum tincidunt.
+
+In eget diam orci. Duis sit amet mi vel risus convallis feugiat. Nam feugiat urna a arcu dictum mattis. Duis eget augue ultricies, vulputate lectus vitae, placerat elit. Curabitur rutrum, tellus a tincidunt blandit, neque tellus hendrerit arcu, sed porttitor elit libero et arcu. Phasellus condimentum condimentum nibh pellentesque ornare. Maecenas sit amet lobortis sapien. Sed maximus augue ac nisl tempor euismod. Vivamus scelerisque justo eu nunc rutrum, ut interdum nunc posuere. Nunc et finibus lectus. Etiam sodales augue id urna faucibus porta. Sed tincidunt dolor eu nunc venenatis, vitae condimentum dui suscipit. Etiam dictum placerat arcu in iaculis. Aliquam commodo tellus vel neque dictum tincidunt.
+
+Vestibulum ultrices turpis nisl, a suscipit orci lacinia sit amet. Fusce aliquet ornare tortor eu sodales. Phasellus et eleifend ligula, at sagittis odio. Donec nec imperdiet tortor. Maecenas ultricies vitae quam in eleifend. Fusce faucibus nibh nec arcu tempus, ut egestas massa efficitur. Sed eget porta est. Donec lacinia finibus mi, sed sollicitudin nunc placerat non. Proin eu dui est.
+
+Nulla in vestibulum ante. Aenean facilisis sapien in dui scelerisque pulvinar. Pellentesque tempor neque non odio tincidunt, ac egestas dui tempus. Aliquam nec blandit mauris. Duis sit amet ex ante. Quisque nec odio nisl. Nam blandit quam vel ultricies consequat. Sed ullamcorper quis neque eget eleifend. Donec eget euismod leo, nec imperdiet mauris. Donec auctor lorem in dolor tristique, sit amet consectetur lacus consequat. Phasellus non turpis eget magna pellentesque condimentum. Fusce sed ullamcorper odio, a suscipit justo. Nulla dictum scelerisque erat vel vestibulum. Ut gravida placerat nisl, vitae ornare sem consequat a. Nunc eget lacus non felis vestibulum pretium.
+
+Vestibulum ultricies enim tempor quam sodales, a sollicitudin augue volutpat. Cras at massa neque. Aenean pellentesque orci non nisl suscipit congue. Suspendisse venenatis libero elementum ligula ultrices semper. Nulla lorem nisi, tristique quis dolor et, ullamcorper vestibulum risus. Donec lectus neque, varius a urna id, commodo iaculis leo. Fusce et consectetur eros. Nunc ut porta magna, in viverra libero. Sed congue viverra libero, vel tempus nisl porttitor at. Quisque eget dui erat. In condimentum efficitur convallis. Donec sodales convallis ultricies.
+
+Fusce erat ante, auctor vitae diam ut, vestibulum scelerisque orci. Integer ut aliquet dui. Nulla auctor quam porttitor elit ultricies semper. Mauris auctor id velit sit amet semper. Fusce tincidunt metus nibh, vel convallis nisi gravida a. In ultricies viverra commodo. Nunc ac ante quis ligula dictum molestie. Cras eu sodales nulla. Etiam congue neque ac egestas commodo. Suspendisse gravida auctor fringilla. Maecenas sollicitudin molestie ante non imperdiet. Phasellus cursus orci sed elit consequat, at interdum massa blandit. Maecenas feugiat urna quis malesuada fringilla. Vivamus ultrices pulvinar risus, quis porttitor nulla lobortis vel.
+
+Ut sit amet suscipit leo. Curabitur dictum lacus a lectus elementum, eu pharetra justo pulvinar. Donec vel quam arcu. Maecenas laoreet egestas nunc a ullamcorper. Nullam sagittis volutpat justo vel faucibus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nunc mattis leo id sem porta rhoncus. Maecenas imperdiet quis mi sollicitudin iaculis. Proin placerat non enim in ornare. Vestibulum interdum, metus eu placerat molestie, sem felis accumsan magna, placerat accumsan justo mauris et dolor. Mauris euismod lacus et lectus malesuada eleifend.
+
+In ac arcu lectus. Duis faucibus augue non vulputate malesuada. Nam dictum nunc ac orci fringilla mollis. Proin viverra imperdiet nisi, a efficitur purus elementum nec. Aliquam vulputate magna a arcu sodales ullamcorper. Suspendisse potenti. Mauris condimentum non neque ac auctor. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Cras dignissim hendrerit neque, quis rhoncus nunc eleifend ut. Praesent pulvinar efficitur lacinia. Integer posuere, justo nec commodo tristique, augue sapien pretium felis, ut interdum ligula lectus sit amet risus. Fusce odio eros, ornare eget porttitor sit amet, rutrum sed tellus. Praesent in libero congue, euismod quam quis, dignissim mi. Pellentesque eu justo et risus cursus venenatis vitae nec arcu. Pellentesque tempus odio ac dolor hendrerit, ut pellentesque felis accumsan. Pellentesque pellentesque enim neque, sit amet sagittis mi efficitur non.
+
+Cras pellentesque condimentum mi sit amet hendrerit. Duis sed efficitur sapien. Aenean aliquam massa vitae velit aliquet, ut luctus nisi tempor. Proin id ultrices diam. Quisque fringilla felis et tortor gravida, sit amet fringilla augue rhoncus. Vestibulum suscipit, purus vitae porta fermentum, dui lorem tincidunt ipsum, id commodo lacus risus vitae arcu. Sed sollicitudin tempor dolor ut bibendum. Pellentesque lobortis quam efficitur, venenatis lorem cursus, sodales nisl. Aenean ultricies tortor posuere dolor varius vestibulum. Aliquam non molestie tortor. Proin tristique dictum rhoncus. Suspendisse potenti.
+
+Nulla facilisi. Aenean a ipsum leo. Quisque sed elit volutpat, elementum nisl vel, consequat dui. Quisque ultricies nibh felis. Duis nisl lacus, pellentesque quis dui interdum, finibus vulputate ligula. Nulla facilisi. Fusce laoreet urna in purus egestas porttitor. In hac habitasse platea dictumst. Nam commodo, quam ac tincidunt ultricies, ex velit fringilla quam, quis cursus nulla nisl vel risus. Praesent laoreet mauris at elit maximus iaculis. Nulla et tempor nibh, eget imperdiet ante. Morbi efficitur luctus interdum.
+
+Nulla condimentum nibh at lacinia gravida. Suspendisse potenti. Integer nulla lectus, porttitor at justo vel, iaculis blandit libero. Proin luctus ac magna sit amet rutrum. Vestibulum vitae accumsan mi, ac elementum turpis. Sed imperdiet varius elit sit amet porta. Etiam ut purus nisl. Pellentesque porttitor arcu fermentum, iaculis massa nec, malesuada urna. Interdum et malesuada fames ac ante ipsum primis in faucibus." />
+
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
 </android.support.design.widget.CoordinatorLayout>
