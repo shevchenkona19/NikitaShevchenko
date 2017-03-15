@@ -1,5 +1,8 @@
 package sheva.cardapptrue;
 
+import android.support.annotation.NonNull;
+import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -8,6 +11,8 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
+import android.widget.Toast;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -19,6 +24,8 @@ public class MainActivity extends AppCompatActivity {
     Toolbar tb;
     @BindView(R.id.dwLayout)
     DrawerLayout dwLayout;
+    @BindView(R.id.navView)
+    NavigationView navView;
     private RVAdapter adapter;
 
 
@@ -32,6 +39,33 @@ public class MainActivity extends AppCompatActivity {
                 tb, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         dwLayout.addDrawerListener(toggle);
         toggle.syncState();
+        navView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()){
+                    case R.id.navFeed:
+                        Toast.makeText(MainActivity.this, "Your feed", Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.navInterests:
+                        Toast.makeText(MainActivity.this, "Your interests", Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.navMoney:
+                        Toast.makeText(MainActivity.this, "Your money", Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.navPeople:
+                        Toast.makeText(MainActivity.this, "Your people", Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.navResources:
+                        Toast.makeText(MainActivity.this, "Your Res", Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.navSport:
+                        Toast.makeText(MainActivity.this, "Your sport", Toast.LENGTH_SHORT).show();
+                        break;
+                }
+                dwLayout.closeDrawer(GravityCompat.START);
+                return true;
+            }
+        });
 
         adapter = new RVAdapter(this);
         rvList.setAdapter(adapter);
