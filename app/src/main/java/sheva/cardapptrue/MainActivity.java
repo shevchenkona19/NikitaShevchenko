@@ -1,5 +1,7 @@
 package sheva.cardapptrue;
 
+import android.app.ActivityOptions;
+import android.content.Intent;
 import android.os.Build;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -25,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.navView)
     NavigationView navView;
     private RVAdapter adapter;
-    private Transition
+    private ActivityOptions transitionActivityOptions;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,9 +72,9 @@ public class MainActivity extends AppCompatActivity {
         }
         ItemClickSupport.addTo(rvList).setOnItemClickListener((recyclerView, position, v) -> {
             if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                transitionActivityOptions = ActivityOptions.makeSceneTransitionAnimation(MainActivity.this, ivStart,
+                transitionActivityOptions = ActivityOptions.makeSceneTransitionAnimation(MainActivity.this, v.findViewById(R.id.imageView),
                         "animation1");
-                startActivity(new Intent(MainActivity.this, SecondActivity.class),
+                startActivity(new Intent(MainActivity.this, ItemActivity.class),
                         transitionActivityOptions.toBundle());
             }
         });
