@@ -7,17 +7,20 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class MainActivity extends AppCompatActivity {
-    private RecyclerView rvList;
+    @BindView(R.id.rvList) RecyclerView rvList;
+    @BindView(R.id.toolbar) Toolbar tb;
     private RVAdapter adapter;
-    private Toolbar tb;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        rvList = (RecyclerView) findViewById(R.id.rvList);
-        tb = (Toolbar) findViewById(R.id.toolbar);
+        ButterKnife.bind(this);
 
         setSupportActionBar(tb);
 
