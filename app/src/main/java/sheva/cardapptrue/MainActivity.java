@@ -79,4 +79,10 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    protected void onDestroy() {
+        ItemClickSupport.removeFrom(rvList);
+        super.onDestroy();
+    }
 }

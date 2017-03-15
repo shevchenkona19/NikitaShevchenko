@@ -2,6 +2,7 @@ package sheva.cardapptrue;
 
 import android.os.Build;
 import android.support.design.widget.CoordinatorLayout;
+import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -25,5 +26,7 @@ public class ItemActivity extends AppCompatActivity {
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
             ivTarget.setTransitionName("animation1");
         }
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
     }
 }
