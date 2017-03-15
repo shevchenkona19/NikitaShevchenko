@@ -1,5 +1,6 @@
 package sheva.cardapptrue;
 
+import android.os.Build;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -9,7 +10,6 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 import android.widget.Toast;
 
 import butterknife.BindView;
@@ -25,8 +25,7 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.navView)
     NavigationView navView;
     private RVAdapter adapter;
-    private ItemClickSupport clickSupport;
-
+    private Transition
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,10 +68,13 @@ public class MainActivity extends AppCompatActivity {
         for (int i = 0; i < 100; i++) {
             adapter.addEntity("ENT");
         }
-
-        clickSupport.addTo(rvList);
-        clickSupport.setOnItemClickListener((recyclerView, position, v) -> {
-
+        ItemClickSupport.addTo(rvList).setOnItemClickListener((recyclerView, position, v) -> {
+            if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                transitionActivityOptions = ActivityOptions.makeSceneTransitionAnimation(MainActivity.this, ivStart,
+                        "animation1");
+                startActivity(new Intent(MainActivity.this, SecondActivity.class),
+                        transitionActivityOptions.toBundle());
+            }
         });
     }
 }
