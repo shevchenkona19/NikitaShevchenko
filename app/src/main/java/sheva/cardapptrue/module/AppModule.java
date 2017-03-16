@@ -1,6 +1,7 @@
 package sheva.cardapptrue.module;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 
 import javax.inject.Singleton;
 
@@ -13,20 +14,20 @@ import sheva.cardapptrue.RVAdapter;
  */
 @Module
 public class AppModule {
-    Context context;
+    private Context context;
 
-    public AppModule(Context context){
+    public AppModule(@NonNull Context context){
         this.context = context;
     }
 
     @Provides
     @Singleton
-    Context providesContext(){
+    public Context providesContext(){
         return context;
     }
 
     @Provides
-    RVAdapter providesRVAdapter(Context context){
+    public RVAdapter providesRVAdapter(Context context){
         return new RVAdapter(context);
     }
 }

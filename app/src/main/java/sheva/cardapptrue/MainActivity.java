@@ -36,8 +36,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_drawer);
         ButterKnife.bind(this);
+
         MyApp.getAppComponent().inject(this);
+
         setSupportActionBar(tb);
+
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, dwLayout,
                 tb, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         dwLayout.addDrawerListener(toggle);
