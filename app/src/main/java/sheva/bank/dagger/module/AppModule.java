@@ -16,19 +16,19 @@ import sheva.bank.mvp.presenter.MainActivityPresenter;
 public class AppModule {
     private Application application;
 
-    public AppModule(Application application){
+    public AppModule(Application application) {
         this.application = application;
     }
 
     @Provides
     @Singleton
-    public Context provideContext(){
+    public Context provideContext() {
         return application.getApplicationContext();
     }
 
     @Provides
     @Singleton
-    public MainActivityPresenter provideMainActivityPresenter(){
+    public MainActivityPresenter provideMainActivityPresenter() {
         return new MainActivityPresenter();
     }
 }

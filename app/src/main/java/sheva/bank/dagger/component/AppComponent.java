@@ -14,5 +14,6 @@ import sheva.bank.mvp.view.MainActivity;
 @Singleton
 public interface AppComponent {
     RetrofitComponent plusRetrofitComponent(RetrofitModule rfModule);
+
     void inject(MainActivity activity);
 }

@@ -8,6 +8,8 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.widget.Toast;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import sheva.bank.R;
@@ -17,7 +19,8 @@ import sheva.bank.mvp.view.interfaces.IMainActivityView;
 
 public class MainActivity extends AppCompatActivity implements IMainActivityView, DatePickDialog.IGetDateFromDialog {
     private String date;
-    private MainActivityPresenter presenter;
+    @Inject
+    MainActivityPresenter presenter;
     private Adapter adapter;
     @BindView(R.id.rvList)
     RecyclerView rvList;
@@ -28,6 +31,7 @@ public class MainActivity extends AppCompatActivity implements IMainActivityView
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+        //App.get().inject(this);
         adapter = new Adapter();
         presenter = new MainActivityPresenter();
         presenter.bind(this);

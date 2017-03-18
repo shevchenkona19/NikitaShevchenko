@@ -3,6 +3,7 @@ package sheva.bank;
 import android.app.Application;
 
 import sheva.bank.dagger.component.AppComponent;
+import sheva.bank.dagger.component.DaggerAppComponent;
 import sheva.bank.dagger.component.RetrofitComponent;
 import sheva.bank.dagger.module.AppModule;
 import sheva.bank.dagger.module.RetrofitModule;
@@ -36,5 +37,9 @@ public class App extends Application {
             retrofitComponent = appComponent.plusRetrofitComponent(new RetrofitModule());
         }
         return retrofitComponent;
+    }
+
+    public void clearRetrofitComponent(){
+        retrofitComponent = null;
     }
 }

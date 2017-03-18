@@ -2,6 +2,7 @@
 package sheva.bank.JSONObjects;
 
 import java.util.List;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -25,13 +26,11 @@ public class BankCurrency {
 
     /**
      * No args constructor for use in serialization
-     * 
      */
     public BankCurrency() {
     }
 
     /**
-     * 
      * @param exchangeRate
      * @param baseCurrencyLit
      * @param baseCurrency
