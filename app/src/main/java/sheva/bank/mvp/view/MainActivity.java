@@ -12,6 +12,8 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import sheva.bank.App;
+import sheva.bank.JSONObjects.BankCurrency;
 import sheva.bank.R;
 import sheva.bank.app.adapter.Adapter;
 import sheva.bank.mvp.presenter.MainActivityPresenter;
@@ -19,9 +21,9 @@ import sheva.bank.mvp.view.interfaces.IMainActivityView;
 
 public class MainActivity extends AppCompatActivity implements IMainActivityView, DatePickDialog.IGetDateFromDialog {
     private String date;
+    private Adapter adapter;
     @Inject
     MainActivityPresenter presenter;
-    private Adapter adapter;
     @BindView(R.id.rvList)
     RecyclerView rvList;
 
@@ -31,11 +33,11 @@ public class MainActivity extends AppCompatActivity implements IMainActivityView
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        //App.get().inject(this);
+        App.get().getAppComponent().inject(this);
         adapter = new Adapter();
-        presenter = new MainActivityPresenter();
         presenter.bind(this);
         presenter.showDialogForDate();
+        rvList.setAdapter(adapter);
 
     }
 
@@ -59,7 +61,7 @@ public class MainActivity extends AppCompatActivity implements IMainActivityView
     }
 
     @Override
-    public void updateList() {
+    public void updateList(BankCurrency currency) {
 
     }
 
@@ -67,8 +69,7 @@ public class MainActivity extends AppCompatActivity implements IMainActivityView
     @Override
     public void getDateFromDialog(String date) {
         this.date = date;
-        presenter.updateList();
-        Log.d("MY", "date is " + date);
+        presenter.updateList(date);
     }
 
 

@@ -18,6 +18,9 @@ public class App extends Application {
     public static App get() {
         return instance;
     }
+    public AppComponent getAppComponent(){
+        return appComponent;
+    }
 
     private AppComponent appComponent;
     private RetrofitComponent retrofitComponent;
@@ -42,4 +45,6 @@ public class App extends Application {
     public void clearRetrofitComponent(){
         retrofitComponent = null;
     }
+
+
 }

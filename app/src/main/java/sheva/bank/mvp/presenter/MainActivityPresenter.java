@@ -1,8 +1,14 @@
 package sheva.bank.mvp.presenter;
 
+import android.util.Log;
+
 import javax.inject.Inject;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import sheva.bank.App;
+import sheva.bank.JSONObjects.BankCurrency;
 import sheva.bank.mvp.model.interfaces.BankAPI;
 import sheva.bank.mvp.presenter.interfaces.IMainActivityPresenter;
 import sheva.bank.mvp.view.interfaces.IMainActivityView;
@@ -13,11 +19,12 @@ import sheva.bank.mvp.view.interfaces.IMainActivityView;
 
 public class MainActivityPresenter extends BasePresenter<IMainActivityView> implements IMainActivityPresenter {
     private IMainActivityView iMainActivityView;
+    private static String TAG = MainActivityPresenter.class.getSimpleName();
     @Inject
     BankAPI api;
 
     public MainActivityPresenter() {
-        //App.get().inject(getView());
+        App.get().plusRetrofitComponent().inject(this);
     }
 
     @Override
@@ -31,7 +38,20 @@ public class MainActivityPresenter extends BasePresenter<IMainActivityView> impl
     }
 
     @Override
-    public void updateList() {
-        getView().updateList();
+    public void updateList(String date) {
+        Call<BankCurrency> call = api.getBank(date);
+        call.enqueue(new Callback<BankCurrency>() {
+            @Override
+            public void onResponse(Call<BankCurrency> call, Response<BankCurrency> response) {
+                BankCurrency currency = response.body();
+                getView().updateList(currency);
+            }
+
+            @Override
+            public void onFailure(Call<BankCurrency> call, Throwable t) {
+                Log.e(TAG, t.getMessage());
+            }
+        });
+
     }
 }
