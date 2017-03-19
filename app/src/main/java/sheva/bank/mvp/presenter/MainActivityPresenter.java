@@ -57,9 +57,4 @@ public class MainActivityPresenter extends BasePresenter<IMainActivityView> impl
         });
 
     }
-
-    @Override
-    public void buildOptionsMenu() {
-        getView().buildContextMenu();
-    }
 }

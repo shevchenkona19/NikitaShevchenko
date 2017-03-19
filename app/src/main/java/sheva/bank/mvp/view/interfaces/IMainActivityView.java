@@ -10,5 +10,4 @@ public interface IMainActivityView extends IActivityView {
     void showText(String text);
     void showDialogForDate();
     void updateList(BankCurrency currency);
-    void buildOptionsMenu();
 }

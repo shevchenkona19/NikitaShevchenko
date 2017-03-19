@@ -8,5 +8,4 @@ public interface IMainActivityPresenter {
     void showText(String text);
     void showDialogForDate();
     void updateList(String date);
-    void buildOptionsMenu();
 }
