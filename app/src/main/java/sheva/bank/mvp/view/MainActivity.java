@@ -5,7 +5,6 @@ import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.widget.Toast;
 
 import javax.inject.Inject;
@@ -34,7 +33,7 @@ public class MainActivity extends AppCompatActivity implements IMainActivityView
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         App.get().getAppComponent().inject(this);
-        adapter = new Adapter();
+        adapter = new Adapter(this);
         presenter.bind(this);
         presenter.showDialogForDate();
         rvList.setAdapter(adapter);
@@ -62,7 +61,7 @@ public class MainActivity extends AppCompatActivity implements IMainActivityView
 
     @Override
     public void updateList(BankCurrency currency) {
-
+        adapter.addBankCurrency(currency);
     }
 
     //IGetDateFromDialog

@@ -18,7 +18,6 @@ import sheva.bank.mvp.view.interfaces.IMainActivityView;
  */
 
 public class MainActivityPresenter extends BasePresenter<IMainActivityView> implements IMainActivityPresenter {
-    private IMainActivityView iMainActivityView;
     private static String TAG = MainActivityPresenter.class.getSimpleName();
     @Inject
     BankAPI api;
@@ -39,16 +38,19 @@ public class MainActivityPresenter extends BasePresenter<IMainActivityView> impl
 
     @Override
     public void updateList(String date) {
+        Log.d("MY", "api is" + api);
         Call<BankCurrency> call = api.getBank(date);
         call.enqueue(new Callback<BankCurrency>() {
             @Override
             public void onResponse(Call<BankCurrency> call, Response<BankCurrency> response) {
+                Log.d("MY", "onResp: " + response);
                 BankCurrency currency = response.body();
                 getView().updateList(currency);
             }
 
             @Override
             public void onFailure(Call<BankCurrency> call, Throwable t) {
+                Log.d("MY", "onFail");
                 Log.e(TAG, t.getMessage());
             }
         });

@@ -30,12 +30,15 @@ public class Adapter extends RecyclerView.Adapter<Adapter.AdapterViewHolder> {
     }
     @Override
     public AdapterViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return null;
+        View v = inflater.inflate(R.layout.each_item, parent, false);
+        return new AdapterViewHolder(v);
     }
 
     @Override
     public void onBindViewHolder(AdapterViewHolder holder, int position) {
-
+        holder.tvBuy.setText(list.get(position).getPurchaseRate().toString());
+        holder.tvCurrency.setText(list.get(position).getCurrency().toString());
+        holder.tvSell.setText(list.get(position).getSaleRate().toString());
     }
 
     public void addBankCurrency(BankCurrency currency){
