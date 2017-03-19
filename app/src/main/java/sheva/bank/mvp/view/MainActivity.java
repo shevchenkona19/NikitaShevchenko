@@ -4,7 +4,10 @@ package sheva.bank.mvp.view;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+import android.view.Menu;
 import android.widget.Toast;
 
 import javax.inject.Inject;
@@ -21,6 +24,7 @@ import sheva.bank.mvp.view.interfaces.IMainActivityView;
 public class MainActivity extends AppCompatActivity implements IMainActivityView, DatePickDialog.IGetDateFromDialog {
     private String date;
     private Adapter adapter;
+    private  static final int date_id = 101;
     @Inject
     MainActivityPresenter presenter;
     @BindView(R.id.rvList)
@@ -37,7 +41,14 @@ public class MainActivity extends AppCompatActivity implements IMainActivityView
         presenter.bind(this);
         presenter.showDialogForDate();
         rvList.setAdapter(adapter);
+        rvList.setLayoutManager(new LinearLayoutManager(this));
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        menu.add(Menu.NONE, date_id, Menu.NONE, "Изменить дату");
+        return super.onCreateOptionsMenu(menu);
     }
 
     @Override
@@ -61,13 +72,20 @@ public class MainActivity extends AppCompatActivity implements IMainActivityView
 
     @Override
     public void updateList(BankCurrency currency) {
+        Log.d("MY", "update list in MainActivity");
         adapter.addBankCurrency(currency);
+    }
+
+    @Override
+    public void buildOptionsMenu() {
+
     }
 
     //IGetDateFromDialog
     @Override
     public void getDateFromDialog(String date) {
         this.date = date;
+        Log.d("MY", "getDateFromDialog");
         presenter.updateList(date);
     }
 

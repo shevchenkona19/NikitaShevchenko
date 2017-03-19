@@ -2,6 +2,7 @@ package sheva.bank.app.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,25 +25,36 @@ public class Adapter extends RecyclerView.Adapter<Adapter.AdapterViewHolder> {
     private List<ExchangeRate> list;
     private LayoutInflater inflater;
 
-    public Adapter(Context context){
+    public Adapter(Context context) {
         this.list = new ArrayList<>();
         inflater = LayoutInflater.from(context);
     }
+
     @Override
     public AdapterViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        Log.d("MY", "onCreateVH");
         View v = inflater.inflate(R.layout.each_item, parent, false);
         return new AdapterViewHolder(v);
     }
 
     @Override
     public void onBindViewHolder(AdapterViewHolder holder, int position) {
-        holder.tvBuy.setText(list.get(position).getPurchaseRate().toString());
-        holder.tvCurrency.setText(list.get(position).getCurrency().toString());
-        holder.tvSell.setText(list.get(position).getSaleRate().toString());
+        if (String.valueOf(list.get(position).getPurchaseRate()) == "null" ||
+                String.valueOf(list.get(position).getPurchaseRate()).equals("null")) {
+            holder.tvBuy.setText(String.valueOf(list.get(position).getPurchaseRateNB()));
+            holder.tvCurrency.setText(list.get(position).getCurrency());
+            holder.tvSell.setText(String.valueOf(list.get(position).getSaleRateNB()));
+        } else {
+            holder.tvBuy.setText(String.valueOf(list.get(position).getPurchaseRate()));
+            holder.tvCurrency.setText(list.get(position).getCurrency());
+            holder.tvSell.setText(String.valueOf(list.get(position).getSaleRate()));
+        }
     }
 
-    public void addBankCurrency(BankCurrency currency){
-        for(ExchangeRate er : currency.getExchangeRate()){
+    public void addBankCurrency(BankCurrency currency) {
+        Log.d("MY", "addBankCurr");
+        list.clear();
+        for (ExchangeRate er : currency.getExchangeRate()) {
             list.add(er);
         }
         notifyDataSetChanged();
@@ -50,19 +62,21 @@ public class Adapter extends RecyclerView.Adapter<Adapter.AdapterViewHolder> {
 
     @Override
     public int getItemCount() {
-        return 0;
+        return list.size();
     }
 
-    static class AdapterViewHolder extends RecyclerView.ViewHolder{
+    static class AdapterViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.tvBuy)
         TextView tvBuy;
         @BindView(R.id.tvCurrency)
         TextView tvCurrency;
         @BindView(R.id.tvSell)
         TextView tvSell;
+
         public AdapterViewHolder(View itemView) {
             super(itemView);
-            ButterKnife.bind(itemView);
+            Log.d("MY", "new Card");
+            ButterKnife.bind(this, itemView);
         }
     }
 }

@@ -7,7 +7,7 @@ import android.os.Parcelable;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class ExchangeRate implements Parcelable{
+public class ExchangeRate {
 
     @SerializedName("baseCurrency")
     @Expose
@@ -23,20 +23,18 @@ public class ExchangeRate implements Parcelable{
     private Double purchaseRateNB;
     @SerializedName("saleRate")
     @Expose
-    private Integer saleRate;
+    private Double saleRate;
     @SerializedName("purchaseRate")
     @Expose
     private Double purchaseRate;
 
     /**
      * No args constructor for use in serialization
-     * 
      */
     public ExchangeRate() {
     }
 
     /**
-     * 
      * @param purchaseRateNB
      * @param saleRate
      * @param purchaseRate
@@ -44,7 +42,7 @@ public class ExchangeRate implements Parcelable{
      * @param saleRateNB
      * @param currency
      */
-    public ExchangeRate(String baseCurrency, String currency, Double saleRateNB, Double purchaseRateNB, Integer saleRate, Double purchaseRate) {
+    public ExchangeRate(String baseCurrency, String currency, Double saleRateNB, Double purchaseRateNB, Double saleRate, Double purchaseRate) {
         super();
         this.baseCurrency = baseCurrency;
         this.currency = currency;
@@ -53,23 +51,6 @@ public class ExchangeRate implements Parcelable{
         this.saleRate = saleRate;
         this.purchaseRate = purchaseRate;
     }
-
-    protected ExchangeRate(Parcel in) {
-        baseCurrency = in.readString();
-        currency = in.readString();
-    }
-
-    public static final Creator<ExchangeRate> CREATOR = new Creator<ExchangeRate>() {
-        @Override
-        public ExchangeRate createFromParcel(Parcel in) {
-            return new ExchangeRate(in);
-        }
-
-        @Override
-        public ExchangeRate[] newArray(int size) {
-            return new ExchangeRate[size];
-        }
-    };
 
     public String getBaseCurrency() {
         return baseCurrency;
@@ -103,30 +84,19 @@ public class ExchangeRate implements Parcelable{
         this.purchaseRateNB = purchaseRateNB;
     }
 
-    public Integer getSaleRate() {
-        return saleRate;
+    public Double getSaleRate() {
+            return saleRate;
     }
 
-    public void setSaleRate(Integer saleRate) {
+    public void setSaleRate(Double saleRate) {
         this.saleRate = saleRate;
     }
 
     public Double getPurchaseRate() {
-        return purchaseRate;
+            return purchaseRate;
     }
 
     public void setPurchaseRate(Double purchaseRate) {
         this.purchaseRate = purchaseRate;
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeString(baseCurrency);
-        parcel.writeString(currency);
     }
 }

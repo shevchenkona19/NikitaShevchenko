@@ -38,7 +38,7 @@ public class MainActivityPresenter extends BasePresenter<IMainActivityView> impl
 
     @Override
     public void updateList(String date) {
-        Log.d("MY", "api is" + api);
+        Log.d("MY", "starting update list in presenter");
         Call<BankCurrency> call = api.getBank(date);
         call.enqueue(new Callback<BankCurrency>() {
             @Override
@@ -56,5 +56,10 @@ public class MainActivityPresenter extends BasePresenter<IMainActivityView> impl
             }
         });
 
+    }
+
+    @Override
+    public void buildOptionsMenu() {
+        getView().buildContextMenu();
     }
 }
