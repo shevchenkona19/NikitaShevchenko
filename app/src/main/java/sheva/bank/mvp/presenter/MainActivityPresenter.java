@@ -50,6 +50,7 @@ public class MainActivityPresenter extends BasePresenter<IMainActivityView> impl
 
             @Override
             public void onFailure(Call<BankCurrency> call, Throwable t) {
+                //Постоянно попадает сюда
                 Log.d("MY", "onFail");
                 Log.e(TAG, t.getMessage());
             }

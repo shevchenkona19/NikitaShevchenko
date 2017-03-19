@@ -10,6 +10,6 @@ import sheva.bank.JSONObjects.BankCurrency;
  */
 
 public interface BankAPI {
-    @GET("/p24api/exchange_rates")
+    @GET("p24api/exchange_rates")
     Call<BankCurrency> getBank(@Query("date") String date);
 }
