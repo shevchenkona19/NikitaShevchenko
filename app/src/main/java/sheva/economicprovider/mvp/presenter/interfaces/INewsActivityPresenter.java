@@ -5,4 +5,5 @@ package sheva.economicprovider.mvp.presenter.interfaces;
  */
 
 public interface INewsActivityPresenter {
+    void updateList();
 }

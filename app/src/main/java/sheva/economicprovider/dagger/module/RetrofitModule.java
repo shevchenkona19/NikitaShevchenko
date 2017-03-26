@@ -40,6 +40,10 @@ public class RetrofitModule {
 
     @Provides
     @Singleton
+    public
+
+    @Provides
+    @Singleton
     public PrivateBankRepository providePrivateBankRepository(){
         return new PrivateBankRepository();
     }

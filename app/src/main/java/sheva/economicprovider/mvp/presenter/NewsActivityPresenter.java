@@ -8,4 +8,8 @@ import sheva.economicprovider.mvp.ui.activities.NewsActivity;
  */
 
 public class NewsActivityPresenter extends BasePresenter<NewsActivity> implements INewsActivityPresenter{
+    @Override
+    public void updateList() {
+        getView().updateList();
+    }
 }
