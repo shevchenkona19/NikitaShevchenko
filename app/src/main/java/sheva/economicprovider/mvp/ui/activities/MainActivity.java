@@ -49,6 +49,7 @@ import sheva.economicprovider.mvp.ui.interfaces.IMainActivityView;
             switch (item.getItemId()){
                 case R.id.navFeed:
                     Intent intent = new Intent(this, NewsActivity.class);
+                    presenter.removeCurrencyFragment();
                     startActivity(intent);
                     break;
                 case R.id.navCurrency:

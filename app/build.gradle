@@ -10,6 +10,11 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+    dexOptions {
+        incremental true
+        javaMaxHeapSize "4096M"
+    }
+
     compileSdkVersion 25
     buildToolsVersion "25.0.1"
     defaultConfig {

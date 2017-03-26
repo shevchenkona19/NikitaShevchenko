@@ -37,6 +37,7 @@ public class NewsItemActivity extends AppCompatActivity implements INewsItemActi
         }
         Picasso.with(this)
                 .load(article.getUrlToImage())
+                .resize(450, 201)
                 .centerCrop()
                 .into(ivTarget);
         tvNewsText.setText(article.getDescription());

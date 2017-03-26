@@ -55,6 +55,7 @@ public class NewsItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             firstNewsItemViewHolder.tvTitle.setText(list.get(position).getTitle());
             Picasso.with(context)
                     .load(list.get(position).getUrlToImage())
+                    .resize(400, 201)
                     .centerCrop()
                     .into(firstNewsItemViewHolder.imageView);
         } else {
@@ -63,6 +64,7 @@ public class NewsItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             newsItemViewHolder.tvDate.setText(list.get(position).getPublishedAt().substring(0, 9));
             Picasso.with(context)
                     .load(list.get(position).getUrlToImage())
+                    .resize(90, 90)
                     .centerCrop()
                     .into(newsItemViewHolder.imageView);
         }
@@ -130,7 +132,7 @@ public class NewsItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
         public NewsItemViewHolder(View itemView) {
             super(itemView);
-            ButterKnife.bind(this, imageView);
+            ButterKnife.bind(this, itemView);
         }
     }
 }
