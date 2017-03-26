@@ -10,7 +10,9 @@ import dagger.Provides;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
+import sheva.economicprovider.mvp.model.interfaces.NewsAPI;
 import sheva.economicprovider.mvp.model.interfaces.PbAPI;
+import sheva.economicprovider.mvp.model.repositories.BusinessInsiderRepository;
 import sheva.economicprovider.mvp.model.repositories.PrivateBankRepository;
 
 /**
@@ -21,7 +23,7 @@ public class RetrofitModule {
 
     @Provides
     @Singleton
-    public PbAPI provideBankAPI(Gson gson){
+    public PbAPI provideBankAPI(Gson gson) {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://api.privatbank.ua/")
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
@@ -31,7 +33,7 @@ public class RetrofitModule {
     }
 
     @Provides
-    public Gson provideGson(){
+    public Gson provideGson() {
         Gson gson = new GsonBuilder()
                 .setLenient()
                 .create();
@@ -40,11 +42,26 @@ public class RetrofitModule {
 
     @Provides
     @Singleton
-    public
+    public BusinessInsiderRepository provideBusinessInsiderRepository() {
+        return new BusinessInsiderRepository();
+    }
 
     @Provides
     @Singleton
-    public PrivateBankRepository providePrivateBankRepository(){
+    public PrivateBankRepository providePrivateBankRepository() {
         return new PrivateBankRepository();
     }
+
+    @Provides
+    @Singleton
+    public NewsAPI provideNewsAPI(Gson gson) {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://newsapi.org/")
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .build();
+        return retrofit.create(NewsAPI.class);
+    }
+
+
 }

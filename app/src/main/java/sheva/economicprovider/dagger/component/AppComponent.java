@@ -6,6 +6,7 @@ import dagger.Component;
 import sheva.economicprovider.dagger.module.AppModule;
 import sheva.economicprovider.dagger.module.RetrofitModule;
 import sheva.economicprovider.mvp.presenter.CurrencyItemFragmentPresenter;
+import sheva.economicprovider.mvp.presenter.NewsActivityPresenter;
 
 /**
  * Created by shevc on 18.03.2017.
@@ -16,4 +17,5 @@ public interface AppComponent {
     RetrofitComponent plusRetrofitComponent(RetrofitModule rfModule);
 
     void inject(CurrencyItemFragmentPresenter presenter);
+    void inject(NewsActivityPresenter presenter);
 }
