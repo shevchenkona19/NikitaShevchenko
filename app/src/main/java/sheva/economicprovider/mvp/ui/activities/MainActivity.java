@@ -1,5 +1,6 @@
     package sheva.economicprovider.mvp.ui.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.DialogFragment;
@@ -47,7 +48,8 @@ import sheva.economicprovider.mvp.ui.interfaces.IMainActivityView;
         navView.setNavigationItemSelectedListener(item -> {
             switch (item.getItemId()){
                 case R.id.navFeed:
-                    Toast.makeText(MainActivity.this, "Your feed", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(this, NewsActivity.class);
+                    startActivity(intent);
                     break;
                 case R.id.navCurrency:
                     presenter.showCurrencyFragment();

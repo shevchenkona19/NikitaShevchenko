@@ -97,6 +97,10 @@ public class NewsItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         return list.size();
     }
 
+    public Article getItemAtPosition(int position){
+        return list.get(position);
+    }
+
     public void addList(List<Article> list) {
         Log.d("MY", "addList");
        this.list.clear();
