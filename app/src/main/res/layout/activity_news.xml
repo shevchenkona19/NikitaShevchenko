@@ -16,12 +16,12 @@
             android:layout_height="wrap_content"
             app:layout_scrollFlags="scroll|enterAlways|snap">
 
-            <Button
+            <ImageButton
                 android:id="@+id/btnRefresh"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:elevation="0dp"
-                android:text="refresh"/>
+                android:src="@drawable/ic_refresh_black_24dp"
+                android:background="@null"/>
         </android.support.v7.widget.Toolbar>
     </android.support.design.widget.AppBarLayout>
 

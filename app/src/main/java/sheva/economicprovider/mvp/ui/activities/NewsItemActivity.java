@@ -4,6 +4,7 @@ import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -24,6 +25,7 @@ public class NewsItemActivity extends AppCompatActivity implements INewsItemActi
     TextView tvNewsTitle;
     @BindView(R.id.ivTarget)
     ImageView ivTarget;
+    private static String TAG = NewsItemActivity.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,13 +33,18 @@ public class NewsItemActivity extends AppCompatActivity implements INewsItemActi
         setContentView(R.layout.activity_news_item);
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
+        try {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        } catch (NullPointerException e){
+            Log.e(TAG, e.getMessage());
+        }
         Article article = (Article) getIntent().getBundleExtra("BUNDLE").get("OBJECT");
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             ivTarget.setTransitionName("animation1");
         }
         Picasso.with(this)
                 .load(article.getUrlToImage())
-                .resize(450, 201)
+                .resize(450, 210)
                 .centerCrop()
                 .into(ivTarget);
         tvNewsText.setText(article.getDescription());

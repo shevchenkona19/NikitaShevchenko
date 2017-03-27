@@ -19,7 +19,14 @@
             </intent-filter>
         </activity>
         <activity android:name=".mvp.ui.activities.NewsActivity" />
-        <activity android:name=".mvp.ui.activities.NewsItemActivity"></activity>
+        <activity
+            android:name=".mvp.ui.activities.NewsItemActivity"
+            android:parentActivityName=".mvp.ui.activities.NewsActivity">
+                   
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".mvp.ui.activities.NewsActivity" />
+        </activity>
     </application>
 
 </manifest>

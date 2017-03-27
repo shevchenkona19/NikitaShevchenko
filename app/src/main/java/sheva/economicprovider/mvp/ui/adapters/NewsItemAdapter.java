@@ -55,7 +55,7 @@ public class NewsItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             firstNewsItemViewHolder.tvTitle.setText(list.get(position).getTitle());
             Picasso.with(context)
                     .load(list.get(position).getUrlToImage())
-                    .resize(400, 201)
+                    .resize(350, 200)
                     .centerCrop()
                     .into(firstNewsItemViewHolder.imageView);
         } else {
@@ -64,7 +64,7 @@ public class NewsItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             newsItemViewHolder.tvDate.setText(list.get(position).getPublishedAt().substring(0, 9));
             Picasso.with(context)
                     .load(list.get(position).getUrlToImage())
-                    .resize(90, 90)
+                    .resize(120, 70)
                     .centerCrop()
                     .into(newsItemViewHolder.imageView);
         }

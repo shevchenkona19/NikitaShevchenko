@@ -7,6 +7,7 @@ import javax.inject.Inject;
 
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 import sheva.economicprovider.App;
 import sheva.economicprovider.mvp.model.datamanager.DataManager;
@@ -48,5 +49,35 @@ public class CurrencyItemFragmentPresenter extends BasePresenter<ICurrencyItemFr
                         list.add(exchangeRate);
                     }
                 });
+    }
+
+    @Override
+    public void updateList(String date, String currency) {
+        List<ExchangeRate> list = new ArrayList<>();
+        dataManager.getObservableOfExchangeRate(date)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .filter(exchangeRate -> {
+                    if (exchangeRate.getCurrency().equals(currency.toUpperCase())){
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }).subscribe(new Subscriber<ExchangeRate>() {
+            @Override
+            public void onCompleted() {
+                getView().updateList(list);
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+
+            @Override
+            public void onNext(ExchangeRate exchangeRate) {
+                list.add(exchangeRate);
+            }
+        });
     }
 }

@@ -24,13 +24,14 @@ import sheva.economicprovider.mvp.ui.interfaces.ICurrencyItemFragmentView;
  * Activities containing this fragment MUST implement the {@link OnListFragmentInteractionListener}
  * interface.
  */
-public class CurrencyItemFragment extends Fragment implements ICurrencyItemFragmentView {
+public class CurrencyItemFragment extends Fragment implements ICurrencyItemFragmentView{
 
     private static final String ARG_COLUMN_COUNT = "column-count";
     private int mColumnCount = 1;
     private OnListFragmentInteractionListener mListener;
     private CurrencyItemAdapter adapter;
     private CurrencyItemFragmentPresenter presenter;
+
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -39,8 +40,6 @@ public class CurrencyItemFragment extends Fragment implements ICurrencyItemFragm
     public CurrencyItemFragment() {
     }
 
-    // TODO: Customize parameter initialization
-    @SuppressWarnings("unused")
     public static CurrencyItemFragment newInstance(int columnCount) {
         CurrencyItemFragment fragment = new CurrencyItemFragment();
         Bundle args = new Bundle();
@@ -75,7 +74,11 @@ public class CurrencyItemFragment extends Fragment implements ICurrencyItemFragm
             }
             recyclerView.setAdapter(adapter);
         }
-        presenter.updateList(mListener.setDateForRequest());
+        if (mListener.setDateForRequest()[1] != null) {
+            presenter.updateList(mListener.setDateForRequest()[0], mListener.setDateForRequest()[1]);
+        } else {
+            presenter.updateList(mListener.setDateForRequest()[0]);
+        }
         return view;
     }
 
@@ -92,10 +95,15 @@ public class CurrencyItemFragment extends Fragment implements ICurrencyItemFragm
     }
 
     @Override
+    public void onDestroy() {
+        presenter.unbind();
+        super.onDestroy();
+    }
+
+    @Override
     public void onDetach() {
         super.onDetach();
         mListener = null;
-        presenter.unbind();
     }
 
     //ICurrencyItemFragmentView
@@ -105,6 +113,6 @@ public class CurrencyItemFragment extends Fragment implements ICurrencyItemFragm
     }
 
     public interface OnListFragmentInteractionListener {
-        String setDateForRequest();
+        String[] setDateForRequest();
     }
 }

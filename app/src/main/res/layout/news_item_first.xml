@@ -13,13 +13,13 @@
         android:layout_height="320dp">
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="199dp"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
             android:id="@+id/ivFirstImage" />
 
         <TextView
             android:textColor="@android:color/black"
-            android:textSize="24dp"
+            android:textSize="21dp"
             android:layout_width="323dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
