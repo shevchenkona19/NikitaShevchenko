@@ -1,5 +1,9 @@
 package sheva.economicprovider.mvp.presenter;
 
+import android.view.View;
+
+import com.arellomobile.mvp.InjectViewState;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,12 +15,13 @@ import sheva.economicprovider.mvp.model.datamanager.DataManager;
 import sheva.economicprovider.mvp.model.entities.Article;
 import sheva.economicprovider.mvp.presenter.interfaces.INewsActivityPresenter;
 import sheva.economicprovider.mvp.ui.activities.NewsActivity;
+import sheva.economicprovider.mvp.ui.interfaces.INewsActivityView;
 
 /**
  * Created by shevc on 26.03.2017.
  */
-
-public class NewsActivityPresenter extends BasePresenter<NewsActivity> implements INewsActivityPresenter {
+@InjectViewState
+public class NewsActivityPresenter extends BasePresenter<INewsActivityView> implements INewsActivityPresenter {
     @Inject
     DataManager manager;
 
@@ -31,7 +36,7 @@ public class NewsActivityPresenter extends BasePresenter<NewsActivity> implement
                 .subscribe(new Subscriber<Article>() {
                     @Override
                     public void onCompleted() {
-                        getView().updateList(list);
+                        getViewState().updateList(list);
                     }
 
                     @Override
@@ -44,5 +49,10 @@ public class NewsActivityPresenter extends BasePresenter<NewsActivity> implement
                         list.add(article);
                     }
                 });
+    }
+
+    @Override
+    public void startActivity(int position, View v) {
+        getViewState().startItemActivity(position, v);
     }
 }

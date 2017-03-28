@@ -16,6 +16,9 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.arellomobile.mvp.MvpAppCompatActivity;
+import com.arellomobile.mvp.presenter.InjectPresenter;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import sheva.economicprovider.R;
@@ -25,14 +28,15 @@ import sheva.economicprovider.mvp.ui.fragments.CurrencyItemFragment;
 import sheva.economicprovider.mvp.ui.fragments.DatePickDialog;
 import sheva.economicprovider.mvp.ui.interfaces.IMainActivityView;
 
-public class MainActivity extends AppCompatActivity implements IMainActivityView, DatePickDialog.IGetDateFromDialog, CurrencyItemFragment.OnListFragmentInteractionListener {
+public class MainActivity extends MvpAppCompatActivity implements IMainActivityView, DatePickDialog.IGetDateFromDialog, CurrencyItemFragment.OnListFragmentInteractionListener {
     @BindView(R.id.toolbar)
     Toolbar toolbar;
     @BindView(R.id.navView)
     NavigationView navView;
     @BindView(R.id.dwLayout)
     DrawerLayout dwLayout;
-    private MainActivityPresenter presenter;
+    @InjectPresenter
+    MainActivityPresenter presenter;
     private CurrencyItemFragment currencyItemFragment;
     private String date;
     private String currency;
@@ -45,8 +49,6 @@ public class MainActivity extends AppCompatActivity implements IMainActivityView
         ButterKnife.bind(this);
         currency = null;
         setSupportActionBar(toolbar);
-        presenter = new MainActivityPresenter();
-        presenter.bind(this);
         isShowed = false;
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, dwLayout,
                 toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_closed);
@@ -142,11 +144,5 @@ public class MainActivity extends AppCompatActivity implements IMainActivityView
     @Override
     public String[] setDateForRequest() {
         return new String[] {date, currency};
-    }
-
-    @Override
-    protected void onDestroy() {
-        presenter.unbind();
-        super.onDestroy();
     }
 }

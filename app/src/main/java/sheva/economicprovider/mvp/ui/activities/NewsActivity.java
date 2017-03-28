@@ -8,9 +8,13 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+
+import com.arellomobile.mvp.MvpAppCompatActivity;
+import com.arellomobile.mvp.presenter.InjectPresenter;
 
 import java.util.List;
 
@@ -25,7 +29,7 @@ import sheva.economicprovider.mvp.presenter.NewsActivityPresenter;
 import sheva.economicprovider.mvp.ui.adapters.NewsItemAdapter;
 import sheva.economicprovider.mvp.ui.interfaces.INewsActivityView;
 
-public class NewsActivity extends AppCompatActivity implements INewsActivityView {
+public class NewsActivity extends MvpAppCompatActivity implements INewsActivityView {
     @BindView(R.id.btnRefresh)
     ImageButton btnRefresh;
     @BindView(R.id.rvNewsList)
@@ -33,7 +37,8 @@ public class NewsActivity extends AppCompatActivity implements INewsActivityView
     @BindView(R.id.tbNewsListToolbar)
     Toolbar toolbar;
     private NewsItemAdapter adapter;
-    private NewsActivityPresenter presenter;
+    @InjectPresenter
+    NewsActivityPresenter presenter;
     private ActivityOptions transitionActivityOptions;
 
     @Override
@@ -42,33 +47,35 @@ public class NewsActivity extends AppCompatActivity implements INewsActivityView
         setContentView(R.layout.activity_news);
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
-        presenter = new NewsActivityPresenter();
-        presenter.bind(this);
         adapter = new NewsItemAdapter(this);
         rvList.setAdapter(adapter);
         rvList.setLayoutManager(new LinearLayoutManager(this));
         btnRefresh.setOnClickListener(view -> presenter.updateList());
-        ItemClickSupport.addTo(rvList).setOnItemClickListener((recyclerView, position, v) -> {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                transitionActivityOptions = ActivityOptions.makeSceneTransitionAnimation(NewsActivity.this, v.findViewById(R.id.ivFirstImage),
-                        "animation1");
-                Intent intent = new Intent(NewsActivity.this, NewsItemActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putParcelable("OBJECT", adapter.getItemAtPosition(position));
-                intent.putExtra("BUNDLE", bundle);
-                startActivity(intent, transitionActivityOptions.toBundle());
-            }
-        });
+        ItemClickSupport.addTo(rvList).setOnItemClickListener((recyclerView, position, v) ->
+            presenter.startActivity(position, v));
     }
 
     @Override
     public void updateList(List<Article> list) {
+        Log.d("MY", "update List in NewsActivity");
         adapter.addList(list);
     }
 
     @Override
+    public void startItemActivity(int position, View v) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            transitionActivityOptions = ActivityOptions.makeSceneTransitionAnimation(NewsActivity.this, v.findViewById(R.id.ivFirstImage),
+                    "animation1");
+            Intent intent = new Intent(NewsActivity.this, NewsItemActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putParcelable("OBJECT", adapter.getItemAtPosition(position));
+            intent.putExtra("BUNDLE", bundle);
+            startActivity(intent, transitionActivityOptions.toBundle());
+        }
+    }
+
+    @Override
     protected void onDestroy() {
-        presenter.unbind();
         ItemClickSupport.removeFrom(rvList);
         super.onDestroy();
     }

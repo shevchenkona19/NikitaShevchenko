@@ -2,13 +2,15 @@ package sheva.economicprovider.mvp.ui.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.arellomobile.mvp.MvpAppCompatFragment;
+import com.arellomobile.mvp.presenter.InjectPresenter;
 
 import java.util.List;
 
@@ -24,13 +26,14 @@ import sheva.economicprovider.mvp.ui.interfaces.ICurrencyItemFragmentView;
  * Activities containing this fragment MUST implement the {@link OnListFragmentInteractionListener}
  * interface.
  */
-public class CurrencyItemFragment extends Fragment implements ICurrencyItemFragmentView{
+public class CurrencyItemFragment extends MvpAppCompatFragment implements ICurrencyItemFragmentView{
 
     private static final String ARG_COLUMN_COUNT = "column-count";
     private int mColumnCount = 1;
     private OnListFragmentInteractionListener mListener;
     private CurrencyItemAdapter adapter;
-    private CurrencyItemFragmentPresenter presenter;
+    @InjectPresenter
+    CurrencyItemFragmentPresenter presenter;
 
 
     /**
@@ -51,8 +54,6 @@ public class CurrencyItemFragment extends Fragment implements ICurrencyItemFragm
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        presenter = new CurrencyItemFragmentPresenter();
-        presenter.bind(this);
         if (getArguments() != null) {
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
         }
@@ -92,12 +93,6 @@ public class CurrencyItemFragment extends Fragment implements ICurrencyItemFragm
             throw new RuntimeException(context.toString()
                     + " must implement OnListFragmentInteractionListener");
         }
-    }
-
-    @Override
-    public void onDestroy() {
-        presenter.unbind();
-        super.onDestroy();
     }
 
     @Override

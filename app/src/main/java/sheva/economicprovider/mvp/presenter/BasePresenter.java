@@ -1,27 +1,30 @@
 package sheva.economicprovider.mvp.presenter;
 
-import android.support.annotation.Nullable;
+import android.support.annotation.NonNull;
 
-import sheva.economicprovider.mvp.ui.interfaces.IView;
+import com.arellomobile.mvp.MvpPresenter;
+import com.arellomobile.mvp.MvpView;
+
+import rx.Subscription;
+import rx.subscriptions.CompositeSubscription;
 
 /**
  * Created by shevc on 18.03.2017.
  */
 
-public abstract class BasePresenter<V extends IView> {
-    @Nullable
-    private V v;
+public abstract class BasePresenter<V extends MvpView> extends MvpPresenter<V> {
+    private CompositeSubscription compositeSubscription = new CompositeSubscription();
 
-    public void bind(V v) {
-        this.v = v;
+    protected void unsubscribeOnDestroy(@NonNull Subscription subscription) {
+        compositeSubscription.add(subscription);
     }
 
-    public void unbind() {
-        this.v = null;
-    }
+    @Override
+    public void onDestroy() {
 
-    @Nullable
-    public V getView(){
-        return v;
+        super.onDestroy();
+
+        compositeSubscription.clear();
+
     }
 }
