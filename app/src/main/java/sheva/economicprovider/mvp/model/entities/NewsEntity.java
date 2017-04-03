@@ -29,14 +29,6 @@ public class NewsEntity implements Parcelable{
      */
     public NewsEntity() {
     }
-
-    /**
-     * 
-     * @param articles
-     * @param sortBy
-     * @param source
-     * @param status
-     */
     public NewsEntity(String status, String source, String sortBy, List<Article> articles) {
         super();
         this.status = status;

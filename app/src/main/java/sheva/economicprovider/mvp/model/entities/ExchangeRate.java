@@ -30,15 +30,6 @@ public class ExchangeRate {
      */
     public ExchangeRate() {
     }
-
-    /**
-     * @param purchaseRateNB
-     * @param saleRate
-     * @param purchaseRate
-     * @param baseCurrency
-     * @param saleRateNB
-     * @param currency
-     */
     public ExchangeRate(String baseCurrency, String currency, Double saleRateNB, Double purchaseRateNB, Double saleRate, Double purchaseRate) {
         super();
         this.baseCurrency = baseCurrency;

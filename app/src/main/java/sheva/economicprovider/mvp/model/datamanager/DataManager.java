@@ -1,15 +1,11 @@
 package sheva.economicprovider.mvp.model.datamanager;
 
 
-import android.util.Log;
-
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
 
 import rx.Observable;
-import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Func1;
 import rx.schedulers.Schedulers;
@@ -17,19 +13,23 @@ import sheva.economicprovider.App;
 import sheva.economicprovider.mvp.model.entities.Article;
 import sheva.economicprovider.mvp.model.entities.BankCurrency;
 import sheva.economicprovider.mvp.model.entities.ExchangeRate;
+import sheva.economicprovider.mvp.model.entities.NBCurrency;
 import sheva.economicprovider.mvp.model.entities.NewsEntity;
 import sheva.economicprovider.mvp.model.repositories.BusinessInsiderRepository;
+import sheva.economicprovider.mvp.model.repositories.NationalBankRepository;
 import sheva.economicprovider.mvp.model.repositories.PrivateBankRepository;
+import sheva.economicprovider.mvp.model.repositories.SharedPreferencesRepository;
 
-/**
- * Created by shevc on 23.03.2017.
- */
 
 public class DataManager {
     @Inject
     PrivateBankRepository pbRep;
     @Inject
     BusinessInsiderRepository businessInsiderRepository;
+    @Inject
+    SharedPreferencesRepository spRep;
+    @Inject
+    NationalBankRepository nationalBankRepository;
 
     @Inject
     public DataManager() {
@@ -52,4 +52,20 @@ public class DataManager {
                 .subscribeOn(Schedulers.io());
         return observable;
     }
+
+    public Observable<List<NBCurrency>> getNBCurrencyList(){
+        return nationalBankRepository.getListOfCurrency()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io());
+    }
+
+    public void setSendNotify(boolean b){
+        spRep.setSendNotification(b);
+    }
+
+    public boolean getSendNotify(){
+        return spRep.getSendNotification();
+    }
+
+
 }

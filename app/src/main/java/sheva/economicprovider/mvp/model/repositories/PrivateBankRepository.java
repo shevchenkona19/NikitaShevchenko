@@ -8,10 +8,6 @@ import sheva.economicprovider.App;
 import sheva.economicprovider.mvp.model.entities.BankCurrency;
 import sheva.economicprovider.mvp.model.interfaces.PbAPI;
 
-/**
- * Created by shevc on 23.03.2017.
- */
-
 public class PrivateBankRepository {
     @Inject
     PbAPI pbAPI;

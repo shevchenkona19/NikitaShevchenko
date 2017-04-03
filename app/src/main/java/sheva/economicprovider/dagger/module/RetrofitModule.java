@@ -10,9 +10,11 @@ import dagger.Provides;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
+import sheva.economicprovider.mvp.model.interfaces.NBAPI;
 import sheva.economicprovider.mvp.model.interfaces.NewsAPI;
 import sheva.economicprovider.mvp.model.interfaces.PbAPI;
 import sheva.economicprovider.mvp.model.repositories.BusinessInsiderRepository;
+import sheva.economicprovider.mvp.model.repositories.NationalBankRepository;
 import sheva.economicprovider.mvp.model.repositories.PrivateBankRepository;
 
 /**
@@ -33,12 +35,35 @@ public class RetrofitModule {
     }
 
     @Provides
+    @Singleton
+    public NewsAPI provideNewsAPI(Gson gson) {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://newsapi.org/")
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .build();
+        return retrofit.create(NewsAPI.class);
+    }
+
+    @Provides
+    @Singleton
+    public NBAPI provideNBAPI(Gson gson) {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://bank.gov.ua/")
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .build();
+        return retrofit.create(NBAPI.class);
+    }
+
+    @Provides
     public Gson provideGson() {
         Gson gson = new GsonBuilder()
                 .setLenient()
                 .create();
         return gson;
     }
+
 
     @Provides
     @Singleton
@@ -54,13 +79,8 @@ public class RetrofitModule {
 
     @Provides
     @Singleton
-    public NewsAPI provideNewsAPI(Gson gson) {
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://newsapi.org/")
-                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-                .addConverterFactory(GsonConverterFactory.create(gson))
-                .build();
-        return retrofit.create(NewsAPI.class);
+    public NationalBankRepository provideNationalBankRepository() {
+        return new NationalBankRepository();
     }
 
 

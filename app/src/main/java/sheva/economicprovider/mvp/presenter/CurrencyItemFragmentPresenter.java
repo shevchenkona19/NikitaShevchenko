@@ -9,9 +9,6 @@ import javax.inject.Inject;
 
 import rx.Subscriber;
 import rx.Subscription;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Func1;
-import rx.schedulers.Schedulers;
 import sheva.economicprovider.App;
 import sheva.economicprovider.mvp.model.datamanager.DataManager;
 import sheva.economicprovider.mvp.model.entities.ExchangeRate;
@@ -34,8 +31,6 @@ public class CurrencyItemFragmentPresenter extends BasePresenter<ICurrencyItemFr
     public void updateList(String date) {
         List<ExchangeRate> list = new ArrayList<>();
         Subscription subscription = dataManager.getObservableOfExchangeRate(date)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<ExchangeRate>() {
                     @Override
                     public void onCompleted() {
@@ -59,8 +54,6 @@ public class CurrencyItemFragmentPresenter extends BasePresenter<ICurrencyItemFr
     public void updateList(String date, String currency) {
         List<ExchangeRate> list = new ArrayList<>();
         Subscription subscription = dataManager.getObservableOfExchangeRate(date)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
                 .filter(exchangeRate -> {
                     if (exchangeRate.getCurrency().equals(currency.toUpperCase())){
                         return true;
@@ -84,5 +77,11 @@ public class CurrencyItemFragmentPresenter extends BasePresenter<ICurrencyItemFr
             }
         });
         unsubscribeOnDestroy(subscription);
+    }
+
+    @Override
+    public void onDestroy() {
+        App.get().clearRetrofitComponent();
+        super.onDestroy();
     }
 }

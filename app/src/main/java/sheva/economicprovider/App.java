@@ -8,9 +8,6 @@ import sheva.economicprovider.dagger.component.RetrofitComponent;
 import sheva.economicprovider.dagger.module.AppModule;
 import sheva.economicprovider.dagger.module.RetrofitModule;
 
-/**
- * Created by shevc on 23.03.2017.
- */
 
 public class App extends Application {
     protected static App instance;

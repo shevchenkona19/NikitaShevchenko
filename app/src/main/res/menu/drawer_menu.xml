@@ -8,4 +8,9 @@
             android:id="@+id/navFeed"
             android:title="News" />
     </group>
+    <group>
+        <item
+            android:id="@+id/navSettings"
+            android:title="Settings" />
+    </group>
 </menu>

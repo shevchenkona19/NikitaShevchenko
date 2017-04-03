@@ -5,9 +5,6 @@ import retrofit2.http.Query;
 import rx.Observable;
 import sheva.economicprovider.mvp.model.entities.BankCurrency;
 
-/**
- * Created by shevc on 23.03.2017.
- */
 
 public interface PbAPI {
 

@@ -5,9 +5,6 @@ import retrofit2.http.Query;
 import rx.Observable;
 import sheva.economicprovider.mvp.model.entities.NewsEntity;
 
-/**
- * Created by shevc on 26.03.2017.
- */
 
 public interface NewsAPI {
 

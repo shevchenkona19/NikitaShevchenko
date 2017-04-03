@@ -55,4 +55,10 @@ public class NewsActivityPresenter extends BasePresenter<INewsActivityView> impl
     public void startActivity(int position, View v) {
         getViewState().startItemActivity(position, v);
     }
+
+    @Override
+    public void onDestroy() {
+        App.get().clearRetrofitComponent();
+        super.onDestroy();
+    }
 }

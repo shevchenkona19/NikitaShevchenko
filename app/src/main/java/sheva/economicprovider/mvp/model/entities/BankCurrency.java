@@ -29,14 +29,6 @@ public class BankCurrency {
      */
     public BankCurrency() {
     }
-
-    /**
-     * @param exchangeRate
-     * @param baseCurrencyLit
-     * @param baseCurrency
-     * @param bank
-     * @param date
-     */
     public BankCurrency(String date, String bank, Integer baseCurrency, String baseCurrencyLit, List<ExchangeRate> exchangeRate) {
         super();
         this.date = date;

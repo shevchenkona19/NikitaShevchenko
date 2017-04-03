@@ -34,16 +34,6 @@ public class Article implements Parcelable{
      */
     public Article() {
     }
-
-    /**
-     * 
-     * @param publishedAt
-     * @param author
-     * @param urlToImage
-     * @param title
-     * @param description
-     * @param url
-     */
     public Article(String author, String title, String description, String url, String urlToImage, String publishedAt) {
         super();
         this.author = author;

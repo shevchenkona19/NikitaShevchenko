@@ -8,7 +8,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
@@ -22,7 +21,6 @@ import com.arellomobile.mvp.presenter.InjectPresenter;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import sheva.economicprovider.R;
-import sheva.economicprovider.mvp.presenter.CurrencyItemFragmentPresenter;
 import sheva.economicprovider.mvp.presenter.MainActivityPresenter;
 import sheva.economicprovider.mvp.ui.fragments.CurrencyItemFragment;
 import sheva.economicprovider.mvp.ui.fragments.DatePickDialog;
@@ -40,7 +38,6 @@ public class MainActivity extends MvpAppCompatActivity implements IMainActivityV
     private CurrencyItemFragment currencyItemFragment;
     private String date;
     private String currency;
-    private boolean isShowed;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +46,6 @@ public class MainActivity extends MvpAppCompatActivity implements IMainActivityV
         ButterKnife.bind(this);
         currency = null;
         setSupportActionBar(toolbar);
-        isShowed = false;
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, dwLayout,
                 toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_closed);
         dwLayout.addDrawerListener(toggle);
@@ -63,6 +59,9 @@ public class MainActivity extends MvpAppCompatActivity implements IMainActivityV
                     break;
                 case R.id.navCurrency:
                     presenter.showCurrencyFragment();
+                    break;
+                case R.id.navSettings:
+                    startActivity(new Intent(this, SettingsActivity.class));
                     break;
             }
             dwLayout.closeDrawer(GravityCompat.START);
