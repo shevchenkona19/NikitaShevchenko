@@ -63,7 +63,8 @@ public class CurrencyItemFragment extends MvpAppCompatFragment implements ICurre
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_currencyitem_list, container, false);
-        adapter = new CurrencyItemAdapter(mListener, this.getContext());
+        adapter = new CurrencyItemAdapter(this.getContext());
+        mListener.getAdapter(adapter);
         // Set the adapter
         if (view instanceof RecyclerView) {
             Context context = view.getContext();
@@ -109,5 +110,6 @@ public class CurrencyItemFragment extends MvpAppCompatFragment implements ICurre
 
     public interface OnListFragmentInteractionListener {
         String[] setDateForRequest();
+        void getAdapter(CurrencyItemAdapter adapter);
     }
 }

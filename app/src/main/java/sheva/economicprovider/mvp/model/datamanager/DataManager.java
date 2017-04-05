@@ -1,10 +1,16 @@
 package sheva.economicprovider.mvp.model.datamanager;
 
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import java.util.List;
 
 import javax.inject.Inject;
 
+import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
+import retrofit2.converter.gson.GsonConverterFactory;
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Func1;
@@ -15,6 +21,7 @@ import sheva.economicprovider.mvp.model.entities.BankCurrency;
 import sheva.economicprovider.mvp.model.entities.ExchangeRate;
 import sheva.economicprovider.mvp.model.entities.NBCurrency;
 import sheva.economicprovider.mvp.model.entities.NewsEntity;
+import sheva.economicprovider.mvp.model.interfaces.NBAPI;
 import sheva.economicprovider.mvp.model.repositories.BusinessInsiderRepository;
 import sheva.economicprovider.mvp.model.repositories.NationalBankRepository;
 import sheva.economicprovider.mvp.model.repositories.PrivateBankRepository;
@@ -57,6 +64,19 @@ public class DataManager {
         return nationalBankRepository.getListOfCurrency()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io());
+    }
+
+    public Observable<List<NBCurrency>> getNBCurrencyListForService(){
+        Gson gson = new GsonBuilder()
+                .setLenient()
+                .create();
+        Retrofit retrofit =new Retrofit.Builder()
+                .baseUrl("https://bank.gov.ua/")
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .build();
+        NBAPI nbapi = retrofit.create(NBAPI.class);
+        return nbapi.getNBCurrency();
     }
 
     public void setSendNotify(boolean b){

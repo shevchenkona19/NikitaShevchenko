@@ -2,6 +2,7 @@ package sheva.economicprovider.mvp.ui.adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,23 +12,27 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import rx.Observable;
+import rx.Subscriber;
 import sheva.economicprovider.R;
 import sheva.economicprovider.mvp.model.entities.ExchangeRate;
-import sheva.economicprovider.mvp.ui.fragments.CurrencyItemFragment;
+import sheva.economicprovider.mvp.ui.activities.MainActivity;
 
-public class CurrencyItemAdapter extends RecyclerView.Adapter<CurrencyItemAdapter.ViewHolder> {
+public class CurrencyItemAdapter extends RecyclerView.Adapter<CurrencyItemAdapter.ViewHolder> implements MainActivity.ISendQuery {
 
     private final List<ExchangeRate> mValues;
-    private final CurrencyItemFragment.OnListFragmentInteractionListener mListener;
+    private List<ExchangeRate> filtered;
     private int lastPosition;
     private Context context;
 
-    public CurrencyItemAdapter(CurrencyItemFragment.OnListFragmentInteractionListener listener, Context context) {
-        mListener = listener;
+
+    public CurrencyItemAdapter(Context context) {
         mValues = new ArrayList<>();
+        filtered = new ArrayList<>();
         this.context = context;
     }
 
@@ -40,7 +45,7 @@ public class CurrencyItemAdapter extends RecyclerView.Adapter<CurrencyItemAdapte
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        if (String.valueOf(mValues.get(position).getPurchaseRate()) == "null" ||
+        if (Objects.equals(String.valueOf(mValues.get(position).getPurchaseRate()), "null") ||
                 String.valueOf(mValues.get(position).getPurchaseRate()).equals("null")) {
             holder.tvBuy.setText(String.valueOf(mValues.get(position).getPurchaseRateNB()));
             holder.tvCurrency.setText(mValues.get(position).getCurrency());
@@ -59,7 +64,8 @@ public class CurrencyItemAdapter extends RecyclerView.Adapter<CurrencyItemAdapte
         holder.itemView.clearAnimation();
     }
 
-    public void addList(List<ExchangeRate> list){
+    public void addList(List<ExchangeRate> list) {
+        filtered.addAll(list);
         mValues.clear();
         mValues.addAll(list);
         notifyDataSetChanged();
@@ -77,7 +83,51 @@ public class CurrencyItemAdapter extends RecyclerView.Adapter<CurrencyItemAdapte
         return mValues.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    private void addItemsOfFilter(List<ExchangeRate> list) {
+        mValues.clear();
+        mValues.addAll(list);
+        notifyDataSetChanged();
+    }
+
+    @Override
+    public void sendQuery(String query) {
+        List<ExchangeRate> list = new ArrayList<>();
+
+        Observable.from(filtered)
+                .filter(exchangeRate -> {
+                    if (Objects.equals(String.valueOf(exchangeRate.getPurchaseRate()), "null") ||
+                            String.valueOf(exchangeRate.getPurchaseRate()).equals("null")) {
+                        if (String.valueOf(exchangeRate.getPurchaseRateNB().intValue()).equals(query) ||
+                                String.valueOf(exchangeRate.getSaleRateNB().intValue()).equals(query)) {
+                            return true;
+                        }
+                    } else if (exchangeRate.getCurrency().equals(query) ||
+                            exchangeRate.getBaseCurrency().equals(query)) {
+                        return true;
+                    } else if (String.valueOf(exchangeRate.getPurchaseRate().intValue()).equals(query) ||
+                            String.valueOf(exchangeRate.getSaleRate().intValue()).equals(query)) {
+                        return true;
+                    }
+                    return false;
+                }).subscribe(new Subscriber<ExchangeRate>() {
+            @Override
+            public void onCompleted() {
+                addItemsOfFilter(list);
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                Log.d("MY", e.getMessage());
+            }
+
+            @Override
+            public void onNext(ExchangeRate exchangeRate) {
+                list.add(exchangeRate);
+            }
+        });
+    }
+
+    class ViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.tvBuy)
         TextView tvBuy;
         @BindView(R.id.tvCurrency)
@@ -85,7 +135,7 @@ public class CurrencyItemAdapter extends RecyclerView.Adapter<CurrencyItemAdapte
         @BindView(R.id.tvSell)
         TextView tvSell;
 
-        public ViewHolder(View itemView) {
+        ViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }

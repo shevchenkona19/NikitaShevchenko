@@ -10,32 +10,16 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.NotificationCompat;
 import android.util.Log;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-
 import java.util.ArrayList;
 import java.util.List;
 
-import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
-import retrofit2.converter.gson.GsonConverterFactory;
 import rx.Subscriber;
+import sheva.economicprovider.mvp.model.datamanager.DataManager;
 import sheva.economicprovider.mvp.model.entities.NBCurrency;
-import sheva.economicprovider.mvp.model.interfaces.NBAPI;
 import sheva.economicprovider.mvp.ui.activities.MainActivity;
 
+
 public class NotifyService extends Service {
-
-    @Nullable
-    @Override
-    public IBinder onBind(Intent intent) {
-        return null;
-    }
-
-    @Override
-    public void onCreate() {
-        super.onCreate();
-    }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
@@ -64,17 +48,9 @@ public class NotifyService extends Service {
 
             manager.notify(101, builder.build());
         } else {
-            List<NBCurrency> finalList= new ArrayList<>();
-            Gson gson = new GsonBuilder()
-                    .setLenient()
-                    .create();
-            Retrofit retrofit =new Retrofit.Builder()
-                    .baseUrl("https://bank.gov.ua/")
-                    .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-                    .addConverterFactory(GsonConverterFactory.create(gson))
-                    .build();
-            NBAPI nbapi = retrofit.create(NBAPI.class);
-            nbapi.getNBCurrency()
+            List<NBCurrency> finalList = new ArrayList<>();
+            DataManager manager = new DataManager();
+            manager.getNBCurrencyList()
                     .subscribe(new Subscriber<List<NBCurrency>>() {
                         @Override
                         public void onCompleted() {
@@ -111,11 +87,12 @@ public class NotifyService extends Service {
                         }
                     });
         }
-        return super.onStartCommand(intent, flags, startId);
+        return START_STICKY;
     }
 
+    @Nullable
     @Override
-    public void onDestroy() {
-        super.onDestroy();
+    public IBinder onBind(Intent intent) {
+        return null;
     }
 }

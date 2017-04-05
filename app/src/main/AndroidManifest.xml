@@ -2,7 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="sheva.economicprovider">
 
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:name=".App"
@@ -36,10 +38,24 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".mvp.ui.activities.MainActivity" />
         </activity>
-        <service android:name=".NotifyService"
-            android:enabled="true"
-            android:exported="true"/>
-    </application>
 
+        <service
+            android:name=".NotifyService"
+            android:enabled="true"
+            android:exported="true" />
+
+        <receiver
+            android:name=".App$MyReceiver"
+            android:enabled="true">
+            <intent-filter>
+                <action android:name="android.net.wifi.STATE_CHANGE" />
+                <action android:name="android.intent.action.AIRPLANE_MODE" />
+                <action android:name="android.intent.action.PHONE_STATE" />
+                <action android:name="android.net.wifi.WIFI_STATE_CHANGED" />
+            </intent-filter>
+        </receiver>
+
+        <activity android:name=".mvp.ui.activities.DialogActivity"></activity>
+    </application>
 
 </manifest>

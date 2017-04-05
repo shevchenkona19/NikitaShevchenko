@@ -1,6 +1,9 @@
 package sheva.economicprovider.mvp.ui.activities;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.DialogFragment;
@@ -8,6 +11,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
@@ -22,8 +26,10 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import sheva.economicprovider.R;
 import sheva.economicprovider.mvp.presenter.MainActivityPresenter;
+import sheva.economicprovider.mvp.ui.adapters.CurrencyItemAdapter;
 import sheva.economicprovider.mvp.ui.fragments.CurrencyItemFragment;
 import sheva.economicprovider.mvp.ui.fragments.DatePickDialog;
+import sheva.economicprovider.mvp.ui.fragments.WifiDialog;
 import sheva.economicprovider.mvp.ui.interfaces.IMainActivityView;
 
 public class MainActivity extends MvpAppCompatActivity implements IMainActivityView, DatePickDialog.IGetDateFromDialog, CurrencyItemFragment.OnListFragmentInteractionListener {
@@ -33,12 +39,14 @@ public class MainActivity extends MvpAppCompatActivity implements IMainActivityV
     NavigationView navView;
     @BindView(R.id.dwLayout)
     DrawerLayout dwLayout;
+    @BindView(R.id.svSearch)
+    SearchView svSearch;
     @InjectPresenter
     MainActivityPresenter presenter;
     private CurrencyItemFragment currencyItemFragment;
     private String date;
     private String currency;
-
+    private ISendQuery iSendQuery;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,6 +76,18 @@ public class MainActivity extends MvpAppCompatActivity implements IMainActivityV
             return true;
         });
         presenter.showCurrencyFragment();
+        svSearch.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                iSendQuery.sendQuery(newText);
+                return false;
+            }
+        });
     }
 
     @Override
@@ -143,5 +163,14 @@ public class MainActivity extends MvpAppCompatActivity implements IMainActivityV
     @Override
     public String[] setDateForRequest() {
         return new String[] {date, currency};
+    }
+
+    @Override
+    public void getAdapter(CurrencyItemAdapter adapter) {
+        iSendQuery = adapter;
+    }
+
+    public interface ISendQuery{
+        void sendQuery(String query);
     }
 }
