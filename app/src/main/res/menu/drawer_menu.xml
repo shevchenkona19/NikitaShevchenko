@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="none">
+        <item
+            android:id="@+id/drawer_feed"
+            android:title="@string/feed"
+            />
+    </group>
+
+    <item android:title="@string/interests">
+        <menu>
+            <item
+                android:id="@+id/drawer_news"
+                android:icon="@drawable/news"
+                android:title="@string/news" />
+            <item
+                android:id="@+id/drawer_tech"
+                android:icon="@drawable/tech"
+                android:title="@string/tech" />
+            <item
+                android:id="@+id/drawer_sport"
+                android:icon="@drawable/sports"
+                android:title="@string/sport" />
+            <item
+                android:id="@+id/drawer_business"
+                android:icon="@drawable/business"
+                android:title="@string/business" />
+            <item
+                android:id="@+id/drawer_entertainment"
+                android:icon="@drawable/entertainment"
+                android:title="@string/entertainment" />
+            <item
+                android:id="@+id/drawer_finance"
+                android:icon="@drawable/finance"
+                android:title="@string/finance" />
+            <item
+                android:id="@+id/drawer_football"
+                android:icon="@drawable/football"
+                android:title="@string/football" />
+            <item
+                android:id="@+id/drawer_games"
+                android:icon="@drawable/games"
+                android:title="@string/games" />
+            <item
+                android:id="@+id/drawer_music"
+                android:icon="@drawable/music"
+                android:title="@string/music" />
+            <item
+                android:id="@+id/drawer_geography"
+                android:icon="@drawable/geography"
+                android:title="@string/geography" />
+            <item
+                android:id="@+id/drawer_science"
+                android:icon="@drawable/science"
+                android:title="@string/science" />
+            <item
+                android:id="@+id/drawer_politics"
+                android:icon="@drawable/politics"
+                android:title="@string/politics" />
+        </menu>
+    </item>
+    <item
+        android:title="@string/utils">
+        <menu>
+            <item
+                android:id="@+id/drawer_settings"
+                android:title="@string/settings"
+                android:icon="@drawable/settings"/>
+        </menu>
+    </item>
+
+</menu>

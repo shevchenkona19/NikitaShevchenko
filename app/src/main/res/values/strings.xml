@@ -17,4 +17,8 @@
     <string name="politics">Politics</string>
     <string name="settings">Settings</string>
     <string name="submit">Submit</string>
+    <string name="interests">Interests</string>
+    <string name="utils">Utils</string>
+    <string name="navigation_drawer_open">open</string>
+    <string name="navigation_drawer_close">close</string>
 </resources>
