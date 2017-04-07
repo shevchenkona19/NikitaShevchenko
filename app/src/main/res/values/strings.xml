@@ -21,4 +21,6 @@
     <string name="utils">Utils</string>
     <string name="navigation_drawer_open">open</string>
     <string name="navigation_drawer_close">close</string>
+    <string name="please_register">Please, register</string>
+    <string name="name">Name</string>
 </resources>
