@@ -9,19 +9,16 @@ import rx.Subscription;
 import rx.subscriptions.CompositeSubscription;
 
 
-public abstract class BasePresenter<V extends MvpView> extends MvpPresenter<V> {
+abstract class BasePresenter<V extends MvpView> extends MvpPresenter<V> {
     private CompositeSubscription compositeSubscription = new CompositeSubscription();
 
-    protected void unsubscribeOnDestroy(@NonNull Subscription subscription) {
+    void unsubscribeOnDestroy(@NonNull Subscription subscription) {
         compositeSubscription.add(subscription);
     }
 
     @Override
     public void onDestroy() {
-
         super.onDestroy();
-
         compositeSubscription.clear();
-
     }
 }

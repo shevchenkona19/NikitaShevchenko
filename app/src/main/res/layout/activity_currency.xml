@@ -17,7 +17,7 @@
         android:layout_height="match_parent"
         tools:context="sheva.cardapptrue.MainActivity">
 
-        <include layout="@layout/toolbar"></include>
+        <include layout="@layout/toolbar"/>
     </android.support.design.widget.CoordinatorLayout>
 
     <android.support.design.widget.NavigationView

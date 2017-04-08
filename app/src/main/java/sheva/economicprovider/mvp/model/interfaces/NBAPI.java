@@ -8,6 +8,7 @@ import sheva.economicprovider.mvp.model.entities.NBCurrency;
 
 /**
  * Created by shevc on 01.04.2017.
+ *
  */
 
 public interface NBAPI {

@@ -10,14 +10,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import java.io.BufferedReader;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import sheva.economicprovider.R;
 
 /**
  * Created by shevc on 05.04.2017.
+ * d
  */
 
 public class WifiDialog extends DialogFragment {

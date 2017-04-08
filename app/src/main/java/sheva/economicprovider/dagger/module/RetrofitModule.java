@@ -18,6 +18,7 @@ import sheva.economicprovider.mvp.model.repositories.NationalBankRepository;
 import sheva.economicprovider.mvp.model.repositories.PrivateBankRepository;
 
 /**
+ *
  * Created by shevc on 18.03.2017.
  */
 @Module

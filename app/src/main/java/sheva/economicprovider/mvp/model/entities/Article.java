@@ -28,13 +28,16 @@ public class Article implements Parcelable{
     @Expose
     private String publishedAt;
 
+    private String date;
+    private int time;
+
     /**
      * No args constructor for use in serialization
      * 
      */
     public Article() {
     }
-    public Article(String author, String title, String description, String url, String urlToImage, String publishedAt) {
+    public Article(String author, String title, String description, String url, String urlToImage, String publishedAt, String date, int time) {
         super();
         this.author = author;
         this.title = title;
@@ -42,15 +45,19 @@ public class Article implements Parcelable{
         this.url = url;
         this.urlToImage = urlToImage;
         this.publishedAt = publishedAt;
+        this.date = date;
+        this.time = time;
     }
 
-    protected Article(Parcel in) {
+    private Article(Parcel in) {
         author = in.readString();
         title = in.readString();
         description = in.readString();
         url = in.readString();
         urlToImage = in.readString();
         publishedAt = in.readString();
+        date = in.readString();
+        time = in.readInt();
     }
 
     public static final Creator<Article> CREATOR = new Creator<Article>() {
@@ -113,6 +120,22 @@ public class Article implements Parcelable{
         this.publishedAt = publishedAt;
     }
 
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public int getTime() {
+        return time;
+    }
+
+    public void setTime(int time) {
+        this.time = time;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -126,5 +149,7 @@ public class Article implements Parcelable{
         parcel.writeString(url);
         parcel.writeString(urlToImage);
         parcel.writeString(publishedAt);
+        parcel.writeString(date);
+        parcel.writeInt(time);
     }
 }

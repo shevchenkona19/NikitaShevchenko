@@ -14,4 +14,5 @@ import sheva.economicprovider.mvp.model.entities.Article;
 public interface INewsActivityView extends MvpView {
     void updateList(List<Article> list);
     void startItemActivity(int position, View v);
+    void hideRefresh();
 }

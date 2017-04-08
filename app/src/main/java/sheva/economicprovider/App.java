@@ -9,9 +9,10 @@ import android.net.NetworkInfo;
 import android.widget.Toast;
 
 import sheva.economicprovider.dagger.component.AppComponent;
-import sheva.economicprovider.dagger.component.DaggerAppComponent;
+import sheva.economicprovider.dagger.component.DBComponent;
 import sheva.economicprovider.dagger.component.RetrofitComponent;
 import sheva.economicprovider.dagger.module.AppModule;
+import sheva.economicprovider.dagger.module.DBModule;
 import sheva.economicprovider.dagger.module.RetrofitModule;
 import sheva.economicprovider.mvp.ui.activities.DialogActivity;
 
@@ -29,6 +30,7 @@ public class App extends Application {
 
     private AppComponent appComponent;
     private RetrofitComponent retrofitComponent;
+    private DBComponent dbComponent;
 
     @Override
     public void onCreate() {
@@ -45,6 +47,13 @@ public class App extends Application {
             retrofitComponent = appComponent.plusRetrofitComponent(new RetrofitModule());
         }
         return retrofitComponent;
+    }
+
+    public DBComponent plusDBComponent() {
+        if (dbComponent == null) {
+            dbComponent = appComponent.plusDBComponent(new DBModule());
+        }
+        return dbComponent;
     }
 
     public void clearRetrofitComponent() {

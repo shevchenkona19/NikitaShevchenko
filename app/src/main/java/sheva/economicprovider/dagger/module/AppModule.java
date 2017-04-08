@@ -13,6 +13,7 @@ import sheva.economicprovider.mvp.model.repositories.SharedPreferencesRepository
 
 /**
  * Created by shevc on 18.03.2017.
+ *
  */
 @Module
 public class AppModule {
@@ -43,6 +44,6 @@ public class AppModule {
     @Provides
     @Singleton
     public SharedPreferences provideSharedPreferences(){
-        return application.getSharedPreferences("NOTIFICATIONS",application.MODE_PRIVATE);
+        return application.getSharedPreferences("NOTIFICATIONS", Context.MODE_PRIVATE);
     }
 }

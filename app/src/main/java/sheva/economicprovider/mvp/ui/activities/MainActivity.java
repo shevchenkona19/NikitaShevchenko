@@ -1,9 +1,6 @@
 package sheva.economicprovider.mvp.ui.activities;
 
-import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.Intent;
-import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.DialogFragment;
@@ -29,7 +26,6 @@ import sheva.economicprovider.mvp.presenter.MainActivityPresenter;
 import sheva.economicprovider.mvp.ui.adapters.CurrencyItemAdapter;
 import sheva.economicprovider.mvp.ui.fragments.CurrencyItemFragment;
 import sheva.economicprovider.mvp.ui.fragments.DatePickDialog;
-import sheva.economicprovider.mvp.ui.fragments.WifiDialog;
 import sheva.economicprovider.mvp.ui.interfaces.IMainActivityView;
 
 public class MainActivity extends MvpAppCompatActivity implements IMainActivityView, DatePickDialog.IGetDateFromDialog, CurrencyItemFragment.OnListFragmentInteractionListener {
