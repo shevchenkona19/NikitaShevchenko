@@ -6,4 +6,5 @@ package sheva.newsprovider.mvp.presenters.base;
  */
 
 public interface IMainActivityPresenter {
+    void inflatePhoto();
 }

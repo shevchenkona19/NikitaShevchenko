@@ -15,17 +15,19 @@ import sheva.newsprovider.R;
 
 /**
  * Created by shevc on 06.04.2017.
- *
+ * l
  */
 
-public class NewsFragment extends MvpAppCompatFragment{
+public class NewsFragment extends MvpAppCompatFragment {
     @BindView(R.id.rvNewsList)
     RecyclerView rvList;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        ButterKnife.bind(this, container);
+        if (container != null) {
+            ButterKnife.bind(this, container);
+        }
         return super.onCreateView(inflater, container, savedInstanceState);
     }
 }
