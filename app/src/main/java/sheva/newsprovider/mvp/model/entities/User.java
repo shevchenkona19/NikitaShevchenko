@@ -1,7 +1,12 @@
 package sheva.newsprovider.mvp.model.entities;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.support.annotation.Nullable;
+import android.util.Base64;
+
+import java.io.ByteArrayOutputStream;
 
 /**
  * Created by shevc on 09.04.2017.
@@ -14,7 +19,7 @@ public class User {
     @Nullable
     private String username;
     @Nullable
-    private String img;
+    private Bitmap img;
     @Nullable
     private String password;
 
@@ -48,16 +53,18 @@ public class User {
         this.password = password;
     }
 
-    @Nullable
-    public String getImg() {
+    public Bitmap getImgBitmap() {
         return img;
     }
 
-    public void setImg(Uri img) {
-        this.img = img.toString();
+    public String getBitmapString() {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        img.compress(Bitmap.CompressFormat.PNG, 100, baos);
+        byte[] b = baos.toByteArray();
+        return Base64.encodeToString(b, Base64.DEFAULT);
     }
 
-    public void setImg(String img) {
+    public void setImg(Bitmap img) {
         this.img = img;
     }
 }

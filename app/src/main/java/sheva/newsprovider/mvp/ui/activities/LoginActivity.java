@@ -2,6 +2,7 @@ package sheva.newsprovider.mvp.ui.activities;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.BaseTransientBottomBar;
@@ -16,6 +17,9 @@ import android.widget.TextView;
 
 import com.arellomobile.mvp.MvpAppCompatActivity;
 import com.arellomobile.mvp.presenter.InjectPresenter;
+
+import java.security.Permission;
+import java.util.jar.Manifest;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -41,6 +45,7 @@ public class LoginActivity extends MvpAppCompatActivity implements ILoginActivit
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
         ButterKnife.bind(this);
         setSupportActionBar(tbToolbar);
         btnSubmit.setOnClickListener(new View.OnClickListener() {

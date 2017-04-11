@@ -29,7 +29,7 @@ public class SharedPreferencesRepository {
                 .putString(IConstants.Preferences.PREFERENCES_USERNAME, repository.getUsername())
                 .putString(IConstants.Preferences.PREFERENCES_PASSWORD, repository.getPassword())
                 .putString(IConstants.Preferences.PREFERENCES_NAME, repository.getName())
-                .putString(IConstants.Preferences.PREFERENCES_IMG, repository.getImg())
+//                .putString(IConstants.Preferences.PREFERENCES_IMG, repository.getStringBitmap())
                 .putBoolean(IConstants.Preferences.PREFERENCES_ISREGISTRED, true)
                 .apply();
     }

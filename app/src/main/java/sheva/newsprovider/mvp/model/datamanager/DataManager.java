@@ -1,6 +1,10 @@
 package sheva.newsprovider.mvp.model.datamanager;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.util.Base64;
+import android.util.Log;
 
 import javax.inject.Inject;
 
@@ -19,7 +23,7 @@ public class DataManager {
     @Inject
     UserRepository user;
 
-    public DataManager(){
+    public DataManager() {
         App.get().getAppComponent().inject(this);
     }
 
@@ -27,7 +31,7 @@ public class DataManager {
         return sharedPreferencesRepository.isRegistered();
     }
 
-    public void register(String name, String username, String password, Uri img) {
+    public void register(String name, String username, String password, Bitmap img) {
         user.registerMainUser(name, username, password, img);
         sharedPreferencesRepository.register(user);
     }
@@ -41,13 +45,21 @@ public class DataManager {
         return sharedPreferencesRepository.login(username, password);
     }
 
-    public void inflateRegisteredUser(){
+    public void inflateRegisteredUser() {
         String[] userInfo = sharedPreferencesRepository.getUserInfo();
-        user.registerMainUser(userInfo[0], userInfo[1], userInfo[2], userInfo[3]);
+        Bitmap b = null;
+        try {
+            byte[] encodeByte = Base64.decode(userInfo[3], Base64.DEFAULT);
+            b = BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
+        } catch (Exception e) {
+            e.getMessage();
+        }
+        user.registerMainUser(userInfo[0], userInfo[1], userInfo[2], b);
     }
 
-    public String[] getUserInfo() {
-        String[] userInfo = new String[2];
+    public Object[] getUserInfo() {
+        Object[] userInfo = new String[2];
+        Log.d("MY", "Bitmap:" + user.getImg());
         userInfo[0] = user.getName();
         userInfo[1] = user.getImg();
         return userInfo;

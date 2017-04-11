@@ -1,9 +1,16 @@
 package sheva.newsprovider.mvp.ui.activities;
 
+import android.Manifest;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.support.annotation.RequiresApi;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -12,6 +19,8 @@ import android.widget.ImageView;
 import com.arellomobile.mvp.MvpAppCompatActivity;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.squareup.picasso.Picasso;
+
+import java.io.IOException;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -36,12 +45,15 @@ public class RegisterActivity extends MvpAppCompatActivity implements IRegisterA
     @InjectPresenter
     RegisterActivityPresenter presenter;
 
-    private Uri imageUri;
+    private Bitmap imageBitmap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            requestPermissions(new String[]{Manifest.permission.MANAGE_DOCUMENTS, Manifest.permission.READ_EXTERNAL_STORAGE}, 1243);
+        }
         ButterKnife.bind(this);
         setSupportActionBar(tbRegister);
         ivUserIMG.setOnClickListener(new View.OnClickListener() {
@@ -56,14 +68,13 @@ public class RegisterActivity extends MvpAppCompatActivity implements IRegisterA
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (imageUri == null) {
-                    imageUri = Uri.parse("android.resource://sheva.newsprovider/" + R.drawable.default_pic);
-                }
+                /*if (imageBitmap == null) {
+                }*/
                 presenter.register(
                         etName.getText().toString(),
                         etUsername.getText().toString(),
                         etPassword.getText().toString(),
-                        imageUri);
+                        imageBitmap);
             }
         });
     }
@@ -72,9 +83,14 @@ public class RegisterActivity extends MvpAppCompatActivity implements IRegisterA
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == RESULT_OK) {
             if (requestCode == IConstants.RESULT_PIC) {
-                imageUri = data.getData();
+                try {
+                    imageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), data.getData());
+                    Log.d("MY", "Bitmap: "  + imageBitmap);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 Picasso.with(RegisterActivity.this)
-                        .load(imageUri)
+                        .load(data.getData())
                         .resize(120, 120)
                         .into(ivUserIMG);
             }

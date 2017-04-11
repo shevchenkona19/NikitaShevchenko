@@ -1,5 +1,6 @@
 package sheva.newsprovider.mvp.presenters.base;
 
+import android.graphics.Bitmap;
 import android.net.Uri;
 
 /**
@@ -8,5 +9,5 @@ import android.net.Uri;
  */
 
 public interface IRegisterActivityPresenter {
-    void register(String name, String username, String password, Uri img);
+    void register(String name, String username, String password, Bitmap img);
 }

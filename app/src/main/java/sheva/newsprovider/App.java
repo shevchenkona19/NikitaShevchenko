@@ -2,6 +2,8 @@ package sheva.newsprovider;
 
 import android.app.Application;
 
+import java.security.Permission;
+
 import javax.inject.Inject;
 
 import sheva.newsprovider.di.component.AppComponent;

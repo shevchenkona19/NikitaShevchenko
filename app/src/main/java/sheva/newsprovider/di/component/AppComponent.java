@@ -11,6 +11,7 @@ import sheva.newsprovider.mvp.model.repositories.SharedPreferencesRepository;
 import sheva.newsprovider.mvp.presenters.activities.LoginActivityPresenter;
 import sheva.newsprovider.mvp.presenters.activities.MainActivityPresenter;
 import sheva.newsprovider.mvp.presenters.activities.RegisterActivityPresenter;
+import sheva.newsprovider.mvp.presenters.activities.SettingsActivityPresenter;
 import sheva.newsprovider.utils.Navigator;
 
 /**
@@ -25,6 +26,7 @@ public interface AppComponent {
     void inject(RegisterActivityPresenter presenter);
     void inject(LoginActivityPresenter presenter);
     void inject(MainActivityPresenter presenter);
+    void inject(SettingsActivityPresenter presenter);
     void inject(App app);
     void inject(Navigator navigator);
 }

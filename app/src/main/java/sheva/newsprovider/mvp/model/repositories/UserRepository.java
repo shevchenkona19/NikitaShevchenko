@@ -1,5 +1,6 @@
 package sheva.newsprovider.mvp.model.repositories;
 
+import android.graphics.Bitmap;
 import android.net.Uri;
 
 import sheva.newsprovider.mvp.model.entities.User;
@@ -23,17 +24,7 @@ public class UserRepository {
         return mainUser;
     }
 
-    public void registerMainUser(String name, String username, String password, Uri img) {
-        if (mainUser == null) {
-            mainUser = new User();
-        }
-        mainUser.setName(name);
-        mainUser.setUsername(username);
-        mainUser.setPassword(password);
-        mainUser.setImg(img);
-    }
-
-    public void registerMainUser(String name, String username, String password, String img) {
+    public void registerMainUser(String name, String username, String password, Bitmap img) {
         if (mainUser == null) {
             mainUser = new User();
         }
@@ -59,7 +50,11 @@ public class UserRepository {
         return mainUser.getPassword();
     }
 
-    public String getImg() {
-        return mainUser.getImg();
+    public Bitmap getImg() {
+        return mainUser.getImgBitmap();
+    }
+
+    public String getStringBitmap() {
+        return mainUser.getBitmapString();
     }
 }
