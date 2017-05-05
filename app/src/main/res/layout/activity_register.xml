@@ -4,107 +4,103 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/photo_login4"
     tools:context="sheva.newsprovider.mvp.ui.activities.RegisterActivity">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/tbRegisterToolbar"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:background="?attr/colorPrimary"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <TextView
+        android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="24dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="56dp"
         android:text="@string/please_register"
         android:textAppearance="@android:style/TextAppearance.Material.Large"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tbRegisterToolbar"
-        android:layout_marginStart="24dp"
-        android:id="@+id/textView3"
-        tools:ignore="RtlHardcoded" />
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="RtlHardcoded"
+        tools:layout_constraintLeft_creator="1"
+        tools:layout_constraintRight_creator="1"
+        app:layout_constraintHorizontal_bias="0.504" />
 
-    <android.support.design.widget.TextInputLayout
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="24dp"
-        android:layout_marginTop="8dp"
+
+    <EditText
+        android:id="@+id/etRegisterName"
+        android:layout_width="250dp"
+        android:layout_height="36dp"
+        android:layout_marginStart="67dp"
+        android:layout_marginTop="16dp"
+        android:hint="@string/name"
+        android:textColorHint="#cecec6"
+        android:background="@drawable/login_et"
+        android:textColor="#FFF"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ivRegisterUserIMG"
-        android:layout_marginStart="24dp"
-        android:id="@+id/textInputLayout3"
-        tools:ignore="RtlHardcoded">
+        app:layout_constraintTop_toBottomOf="@+id/ivRegisterUserIMG" />
 
-        <EditText
-            android:id="@+id/etRegisterName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/name" />
-    </android.support.design.widget.TextInputLayout>
-
-    <android.support.design.widget.TextInputLayout
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="24dp"
-        android:layout_marginTop="8dp"
+    <EditText
+        android:id="@+id/etRegisterUsername"
+        android:layout_width="250dp"
+        android:layout_height="36dp"
+        android:layout_marginStart="67dp"
+        android:layout_marginTop="16dp"
+        android:hint="@string/username"
+        android:textColorHint="#cecec6"
+        android:background="@drawable/login_et"
+        android:textColor="#FFF"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout3"
-        android:layout_marginStart="24dp"
-        android:id="@+id/textInputLayout4"
-        tools:ignore="RtlHardcoded">
+        app:layout_constraintTop_toBottomOf="@+id/etRegisterName" />
 
-        <EditText
-            android:id="@+id/etRegisterUsername"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/username" />
-    </android.support.design.widget.TextInputLayout>
-
-    <android.support.design.widget.TextInputLayout
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="24dp"
-        android:layout_marginTop="8dp"
+    <EditText
+        android:id="@+id/etRegisterPassword"
+        android:layout_width="250dp"
+        android:layout_height="36dp"
+        android:layout_marginStart="67dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/login_et"
+        android:hint="@string/password"
+        android:inputType="textPassword"
+        android:textColor="#FFF"
+        android:textColorHint="#cecec6"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout4"
-        android:id="@+id/textInputLayout5"
-        tools:ignore="RtlHardcoded">
-
-        <EditText
-            android:id="@+id/etRegisterPassword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/password"
-            android:inputType="textPassword" />
-    </android.support.design.widget.TextInputLayout>
+        app:layout_constraintTop_toBottomOf="@+id/etRegisterUsername"
+        tools:layout_constraintLeft_creator="1" />
 
     <ImageView
         android:id="@+id/ivRegisterUserIMG"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:layout_marginLeft="24dp"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/default_pic"
+        android:layout_width="152dp"
+        android:layout_height="134dp"
+        android:layout_marginTop="19dp"
         android:scaleType="centerCrop"
+        android:src="@drawable/default_pic"
         app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3"
-        tools:ignore="RtlHardcoded" />
+        tools:ignore="RtlHardcoded"
+        tools:layout_constraintLeft_creator="1"
+        tools:layout_constraintRight_creator="1" />
 
     <Button
         android:id="@+id/btnRegisterSubmit"
         style="@style/Widget.AppCompat.Button.Colored"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="24dp"
-        android:layout_marginTop="8dp"
+        android:layout_width="88dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="17dp"
+        android:background="@drawable/submit_btn"
         android:text="@string/submit"
+        android:textColor="@android:color/white"
+        app:layout_constraintRight_toRightOf="@+id/etRegisterPassword"
+        app:layout_constraintTop_toBottomOf="@+id/etRegisterPassword"
+        tools:ignore="RtlHardcoded"
+        tools:layout_constraintRight_creator="1" />
+
+    <Button
+        android:id="@+id/btnRegisterVK"
+        android:layout_width="238dp"
+        android:layout_height="49dp"
+        android:layout_marginTop="18dp"
+        android:text="@string/login_with_vk"
+        android:theme="@style/AppTheme.Button.VK"
+        app:layout_constraintTop_toBottomOf="@+id/btnRegisterSubmit"
+        app:layout_constraintRight_toRightOf="@+id/btnRegisterSubmit"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout5"
-        tools:ignore="RtlHardcoded" />
+        app:layout_constraintHorizontal_bias="1.0" />
 </android.support.constraint.ConstraintLayout>
