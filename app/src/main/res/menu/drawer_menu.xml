@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <group android:checkableBehavior="none">
+    <group>
         <item
             android:id="@+id/drawer_feed"
             android:title="@string/feed"
@@ -57,6 +57,10 @@
                 android:id="@+id/drawer_politics"
                 android:icon="@drawable/politics"
                 android:title="@string/politics" />
+            <item
+                android:id="@+id/drawer_favorite"
+                android:icon="@drawable/ic_star_black_24dp"
+                android:title="@string/favorite" />
         </menu>
     </item>
     <item

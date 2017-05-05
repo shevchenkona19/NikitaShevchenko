@@ -23,4 +23,14 @@
     <string name="navigation_drawer_close">close</string>
     <string name="please_register">Please, register</string>
     <string name="name">Name</string>
+    <string name="notifications">Notifications</string>
+    <string name="change_interests">change interests</string>
+    <string name="exit">Exit</string>
+    <string name="more">more</string>
+    <string name="don_t_have_an_account">Don\'t have an account?</string>
+    <string name="welcome">Welcome!</string>
+    <string name="register">Register!</string>
+    <string name="login_with_vk">Login with VK</string>
+    <string name="favorite">Favorite</string>
+    <integer name="com_vk_sdk_AppId">6004810</integer>
 </resources>
