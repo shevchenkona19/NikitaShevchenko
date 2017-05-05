@@ -1,9 +1,16 @@
 
-package com;
+package sheva.newsprovider.mvp.model.entities;
 
 import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+
+import sheva.newsprovider.mvp.model.entities.weather.Clouds;
+import sheva.newsprovider.mvp.model.entities.weather.Coord;
+import sheva.newsprovider.mvp.model.entities.weather.Main;
+import sheva.newsprovider.mvp.model.entities.weather.Sys;
+import sheva.newsprovider.mvp.model.entities.weather.Weather;
+import sheva.newsprovider.mvp.model.entities.weather.Wind;
 
 public class WeatherEntity {
 
@@ -51,21 +58,6 @@ public class WeatherEntity {
     public WeatherEntity() {
     }
 
-    /**
-     * 
-     * @param id
-     * @param dt
-     * @param clouds
-     * @param coord
-     * @param wind
-     * @param cod
-     * @param visibility
-     * @param sys
-     * @param name
-     * @param base
-     * @param weather
-     * @param main
-     */
     public WeatherEntity(Coord coord, List<Weather> weather, String base, Main main, Integer visibility, Wind wind, Clouds clouds, Integer dt, Sys sys, Integer id, String name, Integer cod) {
         super();
         this.coord = coord;
