@@ -1,5 +1,5 @@
 
-package com;
+package sheva.newsprovider.mvp.model.entities.weather;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -11,10 +11,10 @@ public class Main {
     private Double temp;
     @SerializedName("pressure")
     @Expose
-    private Integer pressure;
+    private Double pressure;
     @SerializedName("humidity")
     @Expose
-    private Integer humidity;
+    private Double humidity;
     @SerializedName("temp_min")
     @Expose
     private Double tempMin;
@@ -37,7 +37,7 @@ public class Main {
      * @param temp
      * @param tempMin
      */
-    public Main(Double temp, Integer pressure, Integer humidity, Double tempMin, Double tempMax) {
+    public Main(Double temp, Double pressure, Double humidity, Double tempMin, Double tempMax) {
         super();
         this.temp = temp;
         this.pressure = pressure;
@@ -54,19 +54,19 @@ public class Main {
         this.temp = temp;
     }
 
-    public Integer getPressure() {
+    public Double getPressure() {
         return pressure;
     }
 
-    public void setPressure(Integer pressure) {
+    public void setPressure(Double pressure) {
         this.pressure = pressure;
     }
 
-    public Integer getHumidity() {
+    public Double getHumidity() {
         return humidity;
     }
 
-    public void setHumidity(Integer humidity) {
+    public void setHumidity(Double humidity) {
         this.humidity = humidity;
     }
 

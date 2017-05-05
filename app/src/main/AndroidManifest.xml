@@ -3,6 +3,9 @@
     package="sheva.newsprovider">
     <uses-permission android:name="android.permission.MANAGE_DOCUMENTS"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
     <application
         android:allowBackup="true"
@@ -13,17 +16,34 @@
         android:theme="@style/MyLightTheme"
         android:name=".App">
         <activity android:name=".mvp.ui.activities.MainActivity"/>
-        <activity android:name=".mvp.ui.activities.LoginActivity"/>
-        <activity android:name=".mvp.ui.activities.RegisterActivity" >
+        <activity android:name=".mvp.ui.activities.LoginActivity"
+                  android:windowSoftInputMode = "adjustResize"
+                  android:theme="@style/LoginRegisterTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".mvp.ui.activities.RegisterActivity"
+            android:windowSoftInputMode="adjustPan"
+            android:theme="@style/LoginRegisterTheme"/>
         <activity android:name=".mvp.ui.activities.NewsItem" />
         <activity android:name=".mvp.ui.activities.SettingsActivity" />
         <activity android:name=".mvp.ui.activities.InterestsActivity" />
+        <service android:name=".NotifyService"
+            android:enabled="true"/>
+        <receiver android:name=".Receiver"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+        </receiver>
+        <activity
+            android:name="com.vk.sdk.VKServiceActivity"
+            android:label="ServiceActivity"
+            android:theme="@style/VK.Transparent" />
     </application>
 
 </manifest>

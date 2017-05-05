@@ -8,4 +8,6 @@ package sheva.newsprovider.mvp.presenters.base;
 public interface ILoginActivityPresenter {
     void login(String username, String password);
     void showError(String err);
+    void startRegisterActivity();
+    void isUsingVk();
 }

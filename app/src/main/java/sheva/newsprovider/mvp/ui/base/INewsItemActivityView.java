@@ -10,4 +10,6 @@ import com.arellomobile.mvp.viewstate.strategy.StateStrategyType;
  */
 @StateStrategyType(AddToEndSingleStrategy.class)
 public interface INewsItemActivityView extends MvpView {
+    void showWebView();
+    void showBrowser();
 }

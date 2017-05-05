@@ -1,17 +1,8 @@
 package sheva.newsprovider.mvp.model.entities;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.support.annotation.Nullable;
-import android.util.Base64;
 
-import java.io.ByteArrayOutputStream;
-
-/**
- * Created by shevc on 09.04.2017.
- * s
- */
+import java.util.List;
 
 public class User {
     @Nullable
@@ -19,9 +10,11 @@ public class User {
     @Nullable
     private String username;
     @Nullable
-    private Bitmap img;
+    private String img;
     @Nullable
     private String password;
+    @Nullable
+    private List<Interest> interestList;
 
     public User() {
     }
@@ -31,7 +24,7 @@ public class User {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(@Nullable String name) {
         this.name = name;
     }
 
@@ -40,7 +33,7 @@ public class User {
         return username;
     }
 
-    public void setUsername(String username) {
+    public void setUsername(@Nullable String username) {
         this.username = username;
     }
 
@@ -49,22 +42,24 @@ public class User {
         return password;
     }
 
-    public void setPassword(String password) {
+    public void setPassword(@Nullable String password) {
         this.password = password;
     }
 
-    public Bitmap getImgBitmap() {
+    public String getImgString() {
         return img;
     }
 
-    public String getBitmapString() {
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        img.compress(Bitmap.CompressFormat.PNG, 100, baos);
-        byte[] b = baos.toByteArray();
-        return Base64.encodeToString(b, Base64.DEFAULT);
+    public void setImg(@Nullable String uri) {
+        img = uri;
     }
 
-    public void setImg(Bitmap img) {
-        this.img = img;
+    @Nullable
+    public List<Interest> getInterestList() {
+        return interestList;
+    }
+
+    public void setInterestList(@Nullable List<Interest> interestList) {
+        this.interestList = interestList;
     }
 }

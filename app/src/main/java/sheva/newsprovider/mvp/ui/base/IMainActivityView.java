@@ -1,16 +1,20 @@
 package sheva.newsprovider.mvp.ui.base;
 
-import android.graphics.Bitmap;
+import android.support.v4.app.Fragment;
 
 import com.arellomobile.mvp.MvpView;
 import com.arellomobile.mvp.viewstate.strategy.AddToEndSingleStrategy;
+import com.arellomobile.mvp.viewstate.strategy.SkipStrategy;
 import com.arellomobile.mvp.viewstate.strategy.StateStrategyType;
 
 /**
  * Created by shevc on 06.04.2017.
  *
  */
-@StateStrategyType(AddToEndSingleStrategy.class)
 public interface IMainActivityView extends MvpView {
-    void inflatePhoto(String name, Bitmap img);
+    @StateStrategyType(AddToEndSingleStrategy.class)
+    void inflatePhoto(String name, String img);
+    void showDialog(String text, String btnText, String action);
+    @StateStrategyType(SkipStrategy.class)
+    void showFragment(Fragment fragment);
 }

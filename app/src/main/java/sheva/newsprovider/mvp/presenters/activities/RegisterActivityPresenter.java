@@ -1,8 +1,6 @@
 package sheva.newsprovider.mvp.presenters.activities;
 
-import android.graphics.Bitmap;
 import android.net.Uri;
-import android.util.Log;
 
 import com.arellomobile.mvp.InjectViewState;
 
@@ -27,9 +25,18 @@ public class RegisterActivityPresenter extends BasePresenter<IRegisterActivityVi
         App.get().getAppComponent().inject(this);
     }
     @Override
-    public void register(String name, String username, String password, Bitmap img) {
-        Log.d("MY", "Bitmap: "  + img);
-        manager.register(name, username, password, img);
+    public void register(String name, String username, String password, Uri img) {
+        manager.register(name, username, password, img.toString());
         getViewState().startLoginActivity();
+    }
+
+    @Override
+    public void putVKAccessToken(String token) {
+        manager.setVKAccessToken(token);
+    }
+
+    @Override
+    public void setUsingVk(boolean b) {
+        manager.setIsUsingVk(b);
     }
 }

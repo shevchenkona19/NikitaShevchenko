@@ -10,10 +10,6 @@ import sheva.newsprovider.mvp.presenters.BasePresenter;
 import sheva.newsprovider.mvp.presenters.base.ILoginActivityPresenter;
 import sheva.newsprovider.mvp.ui.base.ILoginActivityView;
 
-/**
- * Created by shevc on 06.04.2017.
- * f
- */
 @InjectViewState
 public class LoginActivityPresenter extends BasePresenter<ILoginActivityView> implements ILoginActivityPresenter {
     @Inject
@@ -36,5 +32,17 @@ public class LoginActivityPresenter extends BasePresenter<ILoginActivityView> im
     @Override
     public void showError(String err) {
         getViewState().showError(err);
+    }
+
+    @Override
+    public void startRegisterActivity() {
+        getViewState().startRegisterActivity();
+    }
+
+    @Override
+    public void isUsingVk() {
+        if (manager.isUsingVK()){
+            getViewState().onLogged();
+        }
     }
 }

@@ -1,8 +1,20 @@
 package sheva.newsprovider.mvp.model.entities;
 
-/**
- * Created by shevc on 30.04.2017.
- */
+public class ArticleDB extends Article {
 
-public class ArticleDB {
+    private int newsId;
+
+    public ArticleDB(String author, String title, String description,
+                     String url, String urlToImage, String publishedAt, int newsId) {
+        super(author, title, description, url, urlToImage, publishedAt);
+        this.newsId = newsId;
+    }
+
+    public int getNewsId() {
+        return newsId;
+    }
+
+    public void setNewsId(int newsId) {
+        this.newsId = newsId;
+    }
 }

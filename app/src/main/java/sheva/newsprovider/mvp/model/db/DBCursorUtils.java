@@ -1,8 +1,28 @@
 package sheva.newsprovider.mvp.model.db;
 
-/**
- * Created by shevc on 30.04.2017.
- */
+import android.database.Cursor;
 
 public class DBCursorUtils {
+    public static final int BOOLEAN_FALSE = 0;
+    public static final int BOOLEAN_TRUE = 1;
+
+    public static String getString(Cursor cursor, String columnName) {
+        return cursor.getString(cursor.getColumnIndexOrThrow(columnName));
+    }
+
+    public static boolean getBoolean(Cursor cursor, String columnName) {
+        return getInt(cursor, columnName) == BOOLEAN_TRUE;
+    }
+
+    public static long getLong(Cursor cursor, String columnName) {
+        return cursor.getLong(cursor.getColumnIndexOrThrow(columnName));
+    }
+
+    public static int getInt(Cursor cursor, String columnName) {
+        return cursor.getInt(cursor.getColumnIndexOrThrow(columnName));
+    }
+
+    private DBCursorUtils() {
+        throw new AssertionError("No instances.");
+    }
 }

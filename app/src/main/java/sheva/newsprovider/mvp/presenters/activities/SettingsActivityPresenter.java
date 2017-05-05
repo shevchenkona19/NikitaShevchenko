@@ -26,6 +26,45 @@ public class SettingsActivityPresenter extends BasePresenter<ISettingsActivityVi
     @Override
     public void exit() {
         manager.unregisterCurrentUser();
+        manager.setIsUsingVk(false);
         getViewState().exit();
     }
+
+    @Override
+    public void changeInterests() {
+        manager.deleteInterests();
+        getViewState().changeInterests();
+    }
+
+    @Override
+    public void usePhoneBrowser(boolean b) {
+        manager.usePhoneBrowser(b);
+    }
+
+    @Override
+    public void useFahrenheit(boolean b) {
+        manager.setIsUsingFarenheit(b);
+    }
+
+    @Override
+    public void setSwitchBrowser() {
+        getViewState().setSwitchBrowser(manager.isUsingPhoneBrowser());
+    }
+
+    @Override
+    public void setSwitchFahrenheit() {
+        getViewState().setSwitchFarenheit(manager.isUsingFarenheit());
+    }
+
+    @Override
+    public void setSwitchNotify() {
+        getViewState().setSwitchNotifications(manager.isNotify());
+    }
+
+    @Override
+    public void useNotify(boolean b) {
+        manager.setNotifications(b);
+    }
+
+
 }

@@ -1,8 +1,8 @@
 package sheva.newsprovider.mvp.presenters.activities;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.util.Base64;
+import android.net.Uri;
+import android.provider.Settings;
+import android.support.v4.app.Fragment;
 import android.util.Log;
 
 import com.arellomobile.mvp.InjectViewState;
@@ -30,8 +30,28 @@ public class MainActivityPresenter extends BasePresenter<IMainActivityView> impl
 
     @Override
     public void inflatePhoto() {
-        Object[] userInfo = manager.getUserInfo();
-        Log.d("MY", "Bitmap:" + userInfo[1]);
-        getViewState().inflatePhoto(((String)userInfo[0]), ((Bitmap)userInfo[1]));
+        String[] userInfo = manager.getUserInfo();
+        getViewState().inflatePhoto(userInfo[0], userInfo[1]);
     }
+
+    @Override
+    public void checkInternet() {
+        if (!manager.isInternetAvailable()){
+                Log.d("MY", "else");
+                getViewState().showDialog("You are not connected to internet", "connect",
+                        Settings.ACTION_WIFI_SETTINGS);
+        }
+    }
+
+    @Override
+    public void showFragment(Fragment fragment) {
+        getViewState().showFragment(fragment);
+    }
+
+    @Override
+    public void writeNewPhoto(Uri uri) {
+        manager.putPhoto(uri);
+    }
+
+
 }

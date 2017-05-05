@@ -1,5 +1,4 @@
-
-package com;
+package sheva.newsprovider.mvp.model.entities;
 
 import java.util.List;
 import com.google.gson.annotations.Expose;
@@ -27,13 +26,6 @@ public class NewsEntity {
     public NewsEntity() {
     }
 
-    /**
-     * 
-     * @param articles
-     * @param sortBy
-     * @param source
-     * @param status
-     */
     public NewsEntity(String status, String source, String sortBy, List<Article> articles) {
         super();
         this.status = status;

@@ -1,30 +1,18 @@
 package sheva.newsprovider.mvp.model.repositories;
 
-import android.graphics.Bitmap;
-import android.net.Uri;
+import java.util.List;
 
+import sheva.newsprovider.mvp.model.entities.Interest;
 import sheva.newsprovider.mvp.model.entities.User;
-
-/**
- * Created by shevc on 09.04.2017.
- * d
- */
 
 public class UserRepository {
     private User mainUser;
 
-    public UserRepository(){
+    public UserRepository() {
         mainUser = new User();
     }
 
-    public User getMainUser() {
-        if (mainUser == null) {
-            mainUser = new User();
-        }
-        return mainUser;
-    }
-
-    public void registerMainUser(String name, String username, String password, Bitmap img) {
+    public void registerMainUser(String name, String username, String password, String img) {
         if (mainUser == null) {
             mainUser = new User();
         }
@@ -50,11 +38,19 @@ public class UserRepository {
         return mainUser.getPassword();
     }
 
-    public Bitmap getImg() {
-        return mainUser.getImgBitmap();
+    public String getUserImgString() {
+        return mainUser.getImgString();
     }
 
-    public String getStringBitmap() {
-        return mainUser.getBitmapString();
+    public List<Interest> getListOfInterests() {
+        return mainUser.getInterestList();
+    }
+
+    public void setListOfInterests(List<Interest> listOfInterests) {
+        mainUser.setInterestList(listOfInterests);
+    }
+
+    public void deleteInterests() {
+        mainUser.setInterestList(null);
     }
 }

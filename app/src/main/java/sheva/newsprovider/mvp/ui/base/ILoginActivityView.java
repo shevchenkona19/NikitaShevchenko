@@ -6,10 +6,11 @@ import com.arellomobile.mvp.viewstate.strategy.StateStrategyType;
 
 /**
  * Created by shevc on 06.04.2017.
- *
+ *s
  */
 @StateStrategyType(AddToEndSingleStrategy.class)
 public interface ILoginActivityView extends MvpView {
     void showError(String text);
     void onLogged();
+    void startRegisterActivity();
 }

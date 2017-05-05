@@ -1,10 +1,12 @@
+package sheva.newsprovider.mvp.model.entities;
 
-package com;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Article {
+public class Article implements Parcelable {
 
     @SerializedName("author")
     @Expose
@@ -25,6 +27,9 @@ public class Article {
     @Expose
     private String publishedAt;
 
+
+    private String interestName;
+
     /**
      * No args constructor for use in serialization
      * 
@@ -32,15 +37,6 @@ public class Article {
     public Article() {
     }
 
-    /**
-     * 
-     * @param publishedAt
-     * @param author
-     * @param urlToImage
-     * @param title
-     * @param description
-     * @param url
-     */
     public Article(String author, String title, String description, String url, String urlToImage, String publishedAt) {
         super();
         this.author = author;
@@ -50,6 +46,28 @@ public class Article {
         this.urlToImage = urlToImage;
         this.publishedAt = publishedAt;
     }
+
+    protected Article(Parcel in) {
+        author = in.readString();
+        title = in.readString();
+        description = in.readString();
+        url = in.readString();
+        urlToImage = in.readString();
+        publishedAt = in.readString();
+        interestName = in.readString();
+    }
+
+    public static final Creator<Article> CREATOR = new Creator<Article>() {
+        @Override
+        public Article createFromParcel(Parcel in) {
+            return new Article(in);
+        }
+
+        @Override
+        public Article[] newArray(int size) {
+            return new Article[size];
+        }
+    };
 
     public String getAuthor() {
         return author;
@@ -99,4 +117,28 @@ public class Article {
         this.publishedAt = publishedAt;
     }
 
+    public String getInterestName() {
+        return interestName;
+    }
+
+    public void setInterestName(String interestName) {
+        this.interestName = interestName;
+    }
+
+    @Override
+
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(author);
+        parcel.writeString(title);
+        parcel.writeString(description);
+        parcel.writeString(url);
+        parcel.writeString(urlToImage);
+        parcel.writeString(publishedAt);
+        parcel.writeString(interestName);
+    }
 }

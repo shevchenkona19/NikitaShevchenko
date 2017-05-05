@@ -7,4 +7,11 @@ package sheva.newsprovider.mvp.presenters.base;
 
 public interface ISettingsActivityPresenter {
     void exit();
+    void changeInterests();
+    void usePhoneBrowser(boolean b);
+    void useFahrenheit(boolean b);
+    void setSwitchBrowser();
+    void setSwitchFahrenheit();
+    void setSwitchNotify();
+    void useNotify(boolean b);
 }
