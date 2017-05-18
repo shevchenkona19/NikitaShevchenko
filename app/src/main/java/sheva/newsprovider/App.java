@@ -4,6 +4,8 @@ import android.app.Application;
 import android.content.Intent;
 import android.support.annotation.Nullable;
 
+import com.facebook.FacebookSdk;
+import com.facebook.appevents.AppEventsLogger;
 import com.vk.sdk.VKAccessToken;
 import com.vk.sdk.VKAccessTokenTracker;
 import com.vk.sdk.VKSdk;
@@ -53,6 +55,8 @@ public class App extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        FacebookSdk.sdkInitialize(getApplicationContext());
+        AppEventsLogger.activateApp(getApplicationContext());
         VKUtils.getFingerprint(this);
         instance = this;
         appComponent = DaggerAppComponent.builder()

@@ -14,6 +14,9 @@ import android.widget.Toast;
 
 import com.arellomobile.mvp.MvpAppCompatActivity;
 import com.arellomobile.mvp.presenter.InjectPresenter;
+import com.facebook.AccessToken;
+import com.facebook.CallbackManager;
+import com.facebook.login.widget.LoginButton;
 import com.squareup.picasso.Picasso;
 import com.vk.sdk.VKAccessToken;
 import com.vk.sdk.VKCallback;
@@ -55,8 +58,6 @@ public class RegisterActivity extends MvpAppCompatActivity implements IRegisterA
             VKScope.STATUS
     };
 
-    private String User_ID;
-
 
     private Uri imageUri;
 
@@ -89,7 +90,6 @@ public class RegisterActivity extends MvpAppCompatActivity implements IRegisterA
                     etPassword.getText().toString(),
                     imageUri);
         });
-
         btnVk.setOnClickListener(view -> VKSdk.login(RegisterActivity.this, scopes));
     }
 
@@ -109,7 +109,6 @@ public class RegisterActivity extends MvpAppCompatActivity implements IRegisterA
             @Override
             public void onResult(VKAccessToken res) {
                 // Пользователь успешно авторизовался
-                User_ID = res.userId;
                 presenter.putVKAccessToken(res.accessToken);
                 getVKPhoto();
             }

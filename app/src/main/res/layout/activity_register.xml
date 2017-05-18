@@ -81,7 +81,7 @@
     <Button
         android:id="@+id/btnRegisterSubmit"
         style="@style/Widget.AppCompat.Button.Colored"
-        android:layout_width="88dp"
+        android:layout_width="250dp"
         android:layout_height="48dp"
         android:layout_marginTop="17dp"
         android:background="@drawable/submit_btn"
@@ -94,13 +94,27 @@
 
     <Button
         android:id="@+id/btnRegisterVK"
-        android:layout_width="238dp"
-        android:layout_height="49dp"
+        android:layout_width="250dp"
+        android:layout_height="48dp"
         android:layout_marginTop="18dp"
         android:text="@string/login_with_vk"
         android:theme="@style/AppTheme.Button.VK"
-        app:layout_constraintTop_toBottomOf="@+id/btnRegisterSubmit"
-        app:layout_constraintRight_toRightOf="@+id/btnRegisterSubmit"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintHorizontal_bias="1.0" />
+        app:layout_constraintRight_toRightOf="@+id/btnRegisterSubmit"
+        app:layout_constraintTop_toBottomOf="@+id/btnRegisterSubmit" />
+
+    <com.facebook.login.widget.LoginButton
+        android:id="@+id/btnLogin"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnRegisterVK" />
+
 </android.support.constraint.ConstraintLayout>
