@@ -37,8 +37,8 @@ public class App extends Application {
             }
         }
     };
-    protected static App instance;
-    private AppComponent appComponent;
+        protected static App instance;
+        private AppComponent appComponent;
     @Inject
     DataManager dataManager;
 

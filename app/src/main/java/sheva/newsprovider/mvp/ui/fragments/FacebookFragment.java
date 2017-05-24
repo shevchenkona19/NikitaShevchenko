@@ -23,8 +23,8 @@ import butterknife.Unbinder;
 import sheva.newsprovider.R;
 
 public class FacebookFragment extends Fragment{
-    @BindView(R.id.btnFacebookLogin)
-    LoginButton btnFacebookLogin;
+    //@BindView(R.id.btnFacebookLogin)
+    //LoginButton btnFacebookLogin;
     private AccessToken accessToken;
     private CallbackManager manager;
     private Unbinder unbinder;
@@ -49,12 +49,13 @@ public class FacebookFragment extends Fragment{
         View v = inflater.inflate(R.layout.fragment_facebook_login, container, false);
         unbinder = ButterKnife.bind(this, v);
         manager = CallbackManager.Factory.create();
-        btnFacebookLogin.setFragment(this);
+        /*btnFacebookLogin.setFragment(this);
         btnFacebookLogin.setReadPermissions(Collections.singletonList("public_profile"));
         btnFacebookLogin.registerCallback(manager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
                 accessToken = loginResult.getAccessToken();
+                //work on facebook still in progress
             }
 
             @Override
@@ -66,7 +67,7 @@ public class FacebookFragment extends Fragment{
             public void onError(FacebookException error) {
                 utils.showError(error.getMessage());
             }
-        });
+        });*/
         return v;
     }
 
